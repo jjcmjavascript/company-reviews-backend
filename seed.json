@@ -1,0 +1,666 @@
+[
+  {
+    "name": "FullStack Labs",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/FullStack Labs.jpeg"
+  },
+  {
+    "name": "Imagemaker",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Imagemaker.jpeg"
+  },
+  {
+    "name": "Microsoft",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Microsoft.jpeg"
+  },
+  {
+    "name": "Ria Money Transfer",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Ria Money Transfer.jpeg"
+  },
+  {
+    "name": "Front",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Front.jpeg"
+  },
+  {
+    "name": "DEUNA",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/DEUNA.jpeg"
+  },
+  {
+    "name": "SII Group Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/SII Group Chile.jpeg"
+  },
+  {
+    "name": "Automotriz Coseche",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Automotriz Coseche.jpeg"
+  },
+  {
+    "name": "Tata Consultancy Services",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Tata Consultancy Services.jpeg"
+  },
+  {
+    "name": "EPAM Systems",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/EPAM Systems.jpeg"
+  },
+  {
+    "name": "Lumenalta",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Lumenalta.jpeg"
+  },
+  {
+    "name": "Microsystem",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Microsystem.jpeg"
+  },
+  {
+    "name": "KPaz",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/KPaz.jpeg"
+  },
+  {
+    "name": "De Lei Interim",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/De Lei Interim.jpeg"
+  },
+  {
+    "name": "Integ Ltda.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Integ Ltda..jpeg"
+  },
+  {
+    "name": "Galgo",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Galgo.jpeg"
+  },
+  {
+    "name": "Fintoc",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Fintoc.jpeg"
+  },
+  {
+    "name": "Globemee",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Globemee.jpeg"
+  },
+  {
+    "name": "Ita\u00fa Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Ita\u00fa Chile.jpeg"
+  },
+  {
+    "name": "Grupo Falabella",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Grupo Falabella.jpeg"
+  },
+  {
+    "name": "TINET S.A.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/TINET S.A..jpeg"
+  },
+  {
+    "name": "Braintrust",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Braintrust.jpeg"
+  },
+  {
+    "name": "Leniolabs_",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Leniolabs_.jpeg"
+  },
+  {
+    "name": "Empresas SB",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Empresas SB.jpeg"
+  },
+  {
+    "name": "Duemint",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Duemint.jpeg"
+  },
+  {
+    "name": "SEIDOR Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/SEIDOR Chile.jpeg"
+  },
+  {
+    "name": "Agilesoft",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Agilesoft.jpeg"
+  },
+  {
+    "name": "DaCodes.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/DaCodes..jpeg"
+  },
+  {
+    "name": "NeuralWorks",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/NeuralWorks.jpeg"
+  },
+  {
+    "name": "BC Tecnolog\u00eda",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/BC Tecnolog\u00eda.jpeg"
+  },
+  {
+    "name": "Raven.inc",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Raven.inc.jpeg"
+  },
+  {
+    "name": "Experian Spanish Latam",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Experian Spanish Latam.jpeg"
+  },
+  {
+    "name": "Apply Digital",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Apply Digital.jpeg"
+  },
+  {
+    "name": "MATCH\u00b7 Agencia-consultora de productos y servicios digitales",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/MATCH\u00b7 Agencia-consultora de productos y servicios digitales.jpeg"
+  },
+  {
+    "name": "Trend Marketing",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Trend Marketing.jpeg"
+  },
+  {
+    "name": "Gigster",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Gigster.jpeg"
+  },
+  {
+    "name": "SOAINT",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/SOAINT.jpeg"
+  },
+  {
+    "name": "Equifax",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Equifax.jpeg"
+  },
+  {
+    "name": "Sparq",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Sparq.jpeg"
+  },
+  {
+    "name": "Finder HR (FinderIT - FinderMe - FinderUs)",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Finder HR (FinderIT - FinderMe - FinderUs).jpeg"
+  },
+  {
+    "name": "Scale Up Recruiting Partners",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Scale Up Recruiting Partners.jpeg"
+  },
+  {
+    "name": "resolbit",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/resolbit.jpeg"
+  },
+  {
+    "name": "Apiux Tech",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Apiux Tech.jpeg"
+  },
+  {
+    "name": "Deel",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Deel.jpeg"
+  },
+  {
+    "name": "COPEC S.A.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/COPEC S.A..jpeg"
+  },
+  {
+    "name": "Kibernum",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Kibernum.jpeg"
+  },
+  {
+    "name": "Groupe SII",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Groupe SII.jpeg"
+  },
+  {
+    "name": "Instituto Profesional AIEP",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Instituto Profesional AIEP.jpeg"
+  },
+  {
+    "name": "Nisum",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Nisum.jpeg"
+  },
+  {
+    "name": "Holding Wiki",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Holding Wiki.jpeg"
+  },
+  {
+    "name": "Adviters",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Adviters.jpeg"
+  },
+  {
+    "name": "TCIT Cloud Solutions",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/TCIT Cloud Solutions.jpeg"
+  },
+  {
+    "name": "Merapar",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Merapar.jpeg"
+  },
+  {
+    "name": "BICE VIDA",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/BICE VIDA.jpeg"
+  },
+  {
+    "name": "Outlier",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Outlier.jpeg"
+  },
+  {
+    "name": "Principal Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Principal Chile.jpeg"
+  },
+  {
+    "name": "EY",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/EY.jpeg"
+  },
+  {
+    "name": "NEORIS",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/NEORIS.jpeg"
+  },
+  {
+    "name": "Tsoft",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Tsoft.jpeg"
+  },
+  {
+    "name": "SoftServe",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/SoftServe.jpeg"
+  },
+  {
+    "name": "Empresa Confidencial",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Empresa Confidencial.jpeg"
+  },
+  {
+    "name": "Tigabytes_CL",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Tigabytes_CL.jpeg"
+  },
+  {
+    "name": "Previsible",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Previsible.jpeg"
+  },
+  {
+    "name": "Altia",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Altia.jpeg"
+  },
+  {
+    "name": "Fz Sports",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Fz Sports.jpeg"
+  },
+  {
+    "name": "ChileCompra",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/ChileCompra.jpeg"
+  },
+  {
+    "name": "GeoVictoria",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/GeoVictoria.jpeg"
+  },
+  {
+    "name": "BIWISER GROUP",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/BIWISER GROUP.jpeg"
+  },
+  {
+    "name": "Vigatec",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Vigatec.jpeg"
+  },
+  {
+    "name": "TC1 Labs",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/TC1 Labs.jpeg"
+  },
+  {
+    "name": "Addy AI",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Addy AI.jpeg"
+  },
+  {
+    "name": "Checkr, Inc.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Checkr, Inc..jpeg"
+  },
+  {
+    "name": "BTG Pactual Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/BTG Pactual Chile.jpeg"
+  },
+  {
+    "name": "Stefanini Group",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Stefanini Group.jpeg"
+  },
+  {
+    "name": "Comscore, Inc.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Comscore, Inc..jpeg"
+  },
+  {
+    "name": "Sezzle",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Sezzle.jpeg"
+  },
+  {
+    "name": "MetLife Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/MetLife Chile.jpeg"
+  },
+  {
+    "name": "Xepelin",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Xepelin.jpeg"
+  },
+  {
+    "name": "Banco Bci",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Banco Bci.jpeg"
+  },
+  {
+    "name": "Uber",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Uber.jpeg"
+  },
+  {
+    "name": "M\u00e9trica Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/M\u00e9trica Chile.jpeg"
+  },
+  {
+    "name": "Globant",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Globant.jpeg"
+  },
+  {
+    "name": "Murex",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Murex.jpeg"
+  },
+  {
+    "name": "Adaptive Security",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Adaptive Security.jpeg"
+  },
+  {
+    "name": "Applaudo",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Applaudo.jpeg"
+  },
+  {
+    "name": "Kyndryl",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Kyndryl.jpeg"
+  },
+  {
+    "name": "Google",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Google.jpeg"
+  },
+  {
+    "name": "Metalkit",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Metalkit.jpeg"
+  },
+  {
+    "name": "Equisoft",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Equisoft.jpeg"
+  },
+  {
+    "name": "Valio",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Valio.jpeg"
+  },
+  {
+    "name": "Kiwox Soluciones Tecnol\u00f3gicas",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Kiwox Soluciones Tecnol\u00f3gicas.jpeg"
+  },
+  {
+    "name": "Synopsys Inc",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Synopsys Inc.jpeg"
+  },
+  {
+    "name": "ZeroFox",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/ZeroFox.jpeg"
+  },
+  {
+    "name": "Kojo",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Kojo.jpeg"
+  },
+  {
+    "name": "MEGAMEDIA S.A.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/MEGAMEDIA S.A..jpeg"
+  },
+  {
+    "name": "Xbrein",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Xbrein.jpeg"
+  },
+  {
+    "name": "Xe.com",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Xe.com.jpeg"
+  },
+  {
+    "name": "Worldly",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Worldly.jpeg"
+  },
+  {
+    "name": "TIPartner Consulting",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/TIPartner Consulting.jpeg"
+  },
+  {
+    "name": "Athenaworks",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Athenaworks.jpeg"
+  },
+  {
+    "name": "Grupo SYCAR",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Grupo SYCAR.jpeg"
+  },
+  {
+    "name": "OMNI.PRO",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/OMNI.PRO.jpeg"
+  },
+  {
+    "name": "IBM",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/IBM.jpeg"
+  },
+  {
+    "name": "Canonical",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Canonical.jpeg"
+  },
+  {
+    "name": "ProGarant\u00eda S.A.G.R",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/ProGarant\u00eda S.A.G.R.jpeg"
+  },
+  {
+    "name": "Deloitte",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Deloitte.jpeg"
+  },
+  {
+    "name": "SKC_Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/SKC_Chile.jpeg"
+  },
+  {
+    "name": "Andes Digital",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Andes Digital.jpeg"
+  },
+  {
+    "name": "Thoughtworks",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Thoughtworks.jpeg"
+  },
+  {
+    "name": "SunDevs",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/SunDevs.jpeg"
+  },
+  {
+    "name": "Ahora Hunting",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Ahora Hunting.jpeg"
+  },
+  {
+    "name": "Headhunter Digital",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Headhunter Digital.jpeg"
+  },
+  {
+    "name": "Experis Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Experis Chile.jpeg"
+  },
+  {
+    "name": "Hapi App",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Hapi App.jpeg"
+  },
+  {
+    "name": "GlobalLogic",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/GlobalLogic.jpeg"
+  },
+  {
+    "name": "MH CHILE",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/MH CHILE.jpeg"
+  },
+  {
+    "name": "CMG3",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/CMG3.jpeg"
+  },
+  {
+    "name": "Infosys",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Infosys.jpeg"
+  },
+  {
+    "name": "LATAM Airlines",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/LATAM Airlines.jpeg"
+  },
+  {
+    "name": "Tactech",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Tactech.jpeg"
+  },
+  {
+    "name": "Sigea Software",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Sigea Software.jpeg"
+  },
+  {
+    "name": "Makerble",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Makerble.jpeg"
+  },
+  {
+    "name": "Skilled Wound Care",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Skilled Wound Care.jpeg"
+  },
+  {
+    "name": "Panoptyc",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Panoptyc.jpeg"
+  },
+  {
+    "name": "AudienceView",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/AudienceView.jpeg"
+  },
+  {
+    "name": "Kapsch Group",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Kapsch Group.jpeg"
+  },
+  {
+    "name": "IDIEM",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/IDIEM.jpeg"
+  },
+  {
+    "name": "Variacode",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Variacode.jpeg"
+  },
+  {
+    "name": "Verne",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Verne.jpeg"
+  },
+  {
+    "name": "AltScore",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/AltScore.jpeg"
+  },
+  {
+    "name": "Wareclouds",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Wareclouds.jpeg"
+  },
+  {
+    "name": "Banco Falabella",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Banco Falabella.jpeg"
+  },
+  {
+    "name": "Select Assistants",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Select Assistants.jpeg"
+  },
+  {
+    "name": "Simon Data",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Simon Data.jpeg"
+  },
+  {
+    "name": "Semrush",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Semrush.jpeg"
+  },
+  {
+    "name": "Cencosud S.A.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Cencosud S.A..jpeg"
+  },
+  {
+    "name": "IT HUNTERS INTERNATIONAL",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/IT HUNTERS INTERNATIONAL.jpeg"
+  },
+  {
+    "name": "Soluciones - an AVOS Tech Company",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Soluciones - an AVOS Tech Company.jpeg"
+  },
+  {
+    "name": "Andes Aerospace",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Andes Aerospace.jpeg"
+  },
+  {
+    "name": "Forest",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Forest.jpeg"
+  },
+  {
+    "name": "Opera Group. Ltda",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Opera Group. Ltda.jpeg"
+  },
+  {
+    "name": "Stakeholders Sustainability Index (SSINDEX)",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Stakeholders Sustainability Index (SSINDEX).jpeg"
+  },
+  {
+    "name": "Salvo Software",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Salvo Software.jpeg"
+  },
+  {
+    "name": "NotCo",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/NotCo.jpeg"
+  },
+  {
+    "name": "Abenis Consultores",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Abenis Consultores.jpeg"
+  },
+  {
+    "name": "MACH",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/MACH.jpeg"
+  },
+  {
+    "name": "ACL",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/ACL.jpeg"
+  },
+  {
+    "name": "JINK.TV (dba Day[9]TV)",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/JINK.TV (dba Day[9]TV).jpeg"
+  },
+  {
+    "name": "Talan",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Talan.jpeg"
+  },
+  {
+    "name": "Topsort",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Topsort.jpeg"
+  },
+  {
+    "name": "Whitestack",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Whitestack.jpeg"
+  },
+  {
+    "name": "Amaris Consulting",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Amaris Consulting.jpeg"
+  },
+  {
+    "name": "AMESTI",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/AMESTI.jpeg"
+  },
+  {
+    "name": "Global Tuning",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Global Tuning.jpeg"
+  },
+  {
+    "name": "Grupo Nuestros Parques",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Grupo Nuestros Parques.jpeg"
+  },
+  {
+    "name": "Grupo Portland",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Grupo Portland.jpeg"
+  },
+  {
+    "name": "Agnos Inc.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Agnos Inc..jpeg"
+  },
+  {
+    "name": "Nubox Chile",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Nubox Chile.jpeg"
+  },
+  {
+    "name": "Halo Media",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Halo Media.jpeg"
+  },
+  {
+    "name": "Talent Connect",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Talent Connect.jpeg"
+  },
+  {
+    "name": "Genesys",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Genesys.jpeg"
+  },
+  {
+    "name": "axity",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/axity.jpeg"
+  },
+  {
+    "name": "ASTRA Group",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/ASTRA Group.jpeg"
+  },
+  {
+    "name": "CMPC",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/CMPC.jpeg"
+  },
+  {
+    "name": "Getdata",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/Getdata.png"
+  },
+  {
+    "name": "ACT S.A.",
+    "imageUrl": "https://raw.githubusercontent.com/jjcmjavascript/companiesImages/refs/heads/main/ACTSA.jpeg"
+  }
+]

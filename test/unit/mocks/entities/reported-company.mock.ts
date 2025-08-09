@@ -1,0 +1,173 @@
+import { ReportedCompanyPaginatedQueryResultItem } from '@shared/interfaces/reported-companies-index.interface';
+
+export const getReportedCompanyPaginatedQueryResultMocks =
+  (): ReportedCompanyPaginatedQueryResultItem[] => [
+    {
+      id: 1,
+      name: 'FullStack Labs',
+      score: 4.5,
+      type: 'Entrevista',
+    },
+    {
+      id: 1,
+      name: 'FullStack Labs',
+      score: 4.5,
+      type: 'Salario',
+    },
+    {
+      id: 1,
+      name: 'FullStack Labs',
+      score: 4.5,
+      type: 'Cultura',
+    },
+    {
+      id: 1,
+      name: 'FullStack Labs',
+      score: 4.5,
+      type: 'Jefatura',
+    },
+    {
+      id: 1,
+      name: 'FullStack Labs',
+      score: 4.5,
+      type: 'Crecimiento',
+    },
+    {
+      id: 1,
+      name: 'FullStack Labs',
+      score: 4.5,
+      type: 'Tecnologia',
+    },
+    {
+      id: 2,
+      name: 'Imagemaker',
+      score: 5,
+      type: 'Entrevista',
+    },
+    {
+      id: 2,
+      name: 'Imagemaker',
+      score: 5,
+      type: 'Salario',
+    },
+    {
+      id: 2,
+      name: 'Imagemaker',
+      score: 5,
+      type: 'Cultura',
+    },
+    {
+      id: 2,
+      name: 'Imagemaker',
+      score: 5,
+      type: 'Jefatura',
+    },
+    {
+      id: 2,
+      name: 'Imagemaker',
+      score: 5,
+      type: 'Crecimiento',
+    },
+    {
+      id: 2,
+      name: 'Imagemaker',
+      score: 5,
+      type: 'Tecnologia',
+    },
+    {
+      id: 3,
+      name: 'Microsoft',
+      score: 5,
+      type: 'Entrevista',
+    },
+    {
+      id: 3,
+      name: 'Microsoft',
+      score: 5,
+      type: 'Salario',
+    },
+    {
+      id: 3,
+      name: 'Microsoft',
+      score: 5,
+      type: 'Cultura',
+    },
+    {
+      id: 3,
+      name: 'Microsoft',
+      score: 5,
+      type: 'Jefatura',
+    },
+    {
+      id: 3,
+      name: 'Microsoft',
+      score: 5,
+      type: 'Crecimiento',
+    },
+    {
+      id: 3,
+      name: 'Microsoft',
+      score: 5,
+      type: 'Tecnologia',
+    },
+    {
+      id: 4,
+      name: 'Ria Money Transfer',
+      score: 5,
+      type: 'Entrevista',
+    },
+    {
+      id: 4,
+      name: 'Ria Money Transfer',
+      score: 5,
+      type: 'Salario',
+    },
+    {
+      id: 4,
+      name: 'Ria Money Transfer',
+      score: 5,
+      type: 'Cultura',
+    },
+    {
+      id: 4,
+      name: 'Ria Money Transfer',
+      score: 5,
+      type: 'Jefatura',
+    },
+    {
+      id: 4,
+      name: 'Ria Money Transfer',
+      score: 5,
+      type: 'Crecimiento',
+    },
+    {
+      id: 4,
+      name: 'Ria Money Transfer',
+      score: 5,
+      type: 'Tecnologia',
+    },
+    {
+      id: 5,
+      name: 'Front',
+      score: 5,
+      type: 'Entrevista',
+    },
+    {
+      id: 5,
+      name: 'Front',
+      score: 5,
+      type: 'Salario',
+    },
+    {
+      id: 5,
+      name: 'Front',
+      score: 5,
+      type: 'Cultura',
+    },
+    {
+      id: 5,
+      name: 'Front',
+      score: 5,
+      type: 'Jefatura',
+    },
+  ];

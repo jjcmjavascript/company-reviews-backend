@@ -1,0 +1,21 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/../src/$1",
+    "^@modules/(.*)$": "<rootDir>/../src/modules/$1",
+    "^@shared/(.*)$": "<rootDir>/../src/shared/$1",
+    "^@config/(.*)$": "<rootDir>/../src/config/$1",
+    "^@services/(.*)$": "<rootDir>/../src/shared/services/$1",
+    "^@entities/(.*)$": "<rootDir>/../src/shared/entities/$1",
+    "^@decorators/(.*)$": "<rootDir>/../src/shared/decorators/$1",
+    "^@helpers/(.*)$": "<rootDir>/../src/shared/helpers/$1"
+
+  },
+  "setupFiles": ["<rootDir>/setup-env.ts"]
+}

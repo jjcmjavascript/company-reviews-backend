@@ -1,0 +1,182 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int                      @id @default(autoincrement())
+  uuid            String?                  @unique @db.VarChar()
+  email           String                   @unique @db.VarChar()
+  name            String?                  @db.VarChar()
+  lastname        String?                  @db.VarChar()
+  tax             String?                  @db.VarChar()
+  deletedAt       DateTime?                @db.Timestamp()
+  createdAt       DateTime                 @default(now()) @db.Timestamp()
+  password        Password?
+  roles           UserRole[]
+  comments        ReportedCompanyComment[]
+  reviews         Review[]
+  reviewReactions ReviewReaction[]
+}
+
+model Password {
+  id        Int       @id @default(autoincrement())
+  password  String    @db.VarChar()
+  userId    Int       @unique
+  deletedAt DateTime? @db.Timestamp()
+  createdAt DateTime  @default(now()) @db.Timestamp()
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserRole {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar()
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now()) @db.Timestamp()
+  deletedAt DateTime? @db.Timestamp()
+}
+
+model ReportedCompany {
+  id                   Int                      @id @default(autoincrement())
+  name                 String                   @unique @db.VarChar()
+  tax                  String?                  @db.VarChar()
+  description          String?                  @db.VarChar()
+  imageUrl             String?                  @db.VarChar()
+  deletedAt            DateTime?                @db.Timestamp()
+  createdAt            DateTime                 @default(now()) @db.Timestamp()
+  comments             ReportedCompanyComment[]
+  reviews              Review[]
+  companySummary       CompanySummary?
+  companySearch        CompanySearch?
+  companyCategoryScore CompanyCategoryScore[]
+}
+
+model ReportedCompanyComment {
+  id                Int             @id @default(autoincrement())
+  reportedCompanyId Int
+  userId            Int
+  description       String          @db.Text()
+  createdAt         DateTime        @default(now()) @db.Timestamp()
+  deletedAt         DateTime?       @db.Timestamp()
+  reportedCompany   ReportedCompany @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id                 Int                       @id @default(autoincrement())
+  userId             Int
+  reportedCompanyId  Int
+  reviewerTypeId     Int
+  description        String?                   @db.Text()
+  verificationStatus ReviewVerificationStatus? @default(NOT_VERIFIED)
+  createdAt          DateTime                  @default(now()) @db.Timestamp()
+  deletedAt          DateTime?                 @db.Timestamp()
+  reviewDetails      ReviewDetail[]
+  reviewerType       ReviewerType              @relation(fields: [reviewerTypeId], references: [id], onDelete: Cascade)
+  user               User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reportedCompany    ReportedCompany           @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
+  ReviewReaction     ReviewReaction[]
+}
+
+model ReviewerType {
+  id                 Int                    @id @default(autoincrement())
+  name               String                 @db.VarChar()
+  createdAt          DateTime               @default(now()) @db.Timestamp()
+  deletedAt          DateTime?              @db.Timestamp()
+  reviewTypeCategory ReviewerTypeCategory[]
+  Review             Review[]
+}
+
+model ReviewerTypeCategory {
+  id             Int          @id @default(autoincrement())
+  reviewerTypeId Int
+  categoryId     Int
+  type           ReviewerType @relation(fields: [reviewerTypeId], references: [id], onDelete: Cascade)
+  category       Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+}
+
+model ReviewDetail {
+  id         Int       @id @default(autoincrement())
+  categoryId Int
+  score      Int
+  reviewId   Int
+  deletedAt  DateTime? @db.Timestamp()
+  createdAt  DateTime  @default(now()) @db.Timestamp()
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  review     Review    @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id                   Int                    @id @default(autoincrement())
+  name                 String                 @db.VarChar()
+  description          String?                @db.Text()
+  deletedAt            DateTime?              @db.Timestamp()
+  createdAt            DateTime               @default(now()) @db.Timestamp()
+  reviewerTypeCategory ReviewerTypeCategory[]
+  ReviewDetail         ReviewDetail[]
+  CompanyCategoryScore CompanyCategoryScore[]
+}
+
+model ReviewReaction {
+  id        Int          @id @default(autoincrement())
+  userId    Int
+  reviewId  Int
+  createdAt DateTime     @default(now()) @db.Timestamp()
+  deletedAt DateTime?    @db.Timestamp()
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review    Review       @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  type      ReactionType @default(LIKE)
+
+  @@unique([userId, reviewId])
+  @@index([reviewId, type])
+}
+
+model CompanySummary {
+  id                Int             @id @default(autoincrement())
+  reportedCompanyId Int             @unique
+  calculatedSummary String?         @db.Text()
+  summary           String?         @db.Text()
+  createdAt         DateTime        @default(now()) @db.Timestamp()
+  deletedAt         DateTime?       @db.Timestamp()
+  reportedCompany   ReportedCompany @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
+}
+
+model CompanySearch {
+  id                Int             @id @default(autoincrement())
+  reportedCompanyId Int             @unique
+  createdAt         DateTime        @default(now()) @db.Timestamp()
+  reportedCompany   ReportedCompany @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
+}
+
+model CompanyCategoryScore {
+  id                Int             @id @default(autoincrement())
+  reportedCompanyId Int
+  categoryId        Int
+  verifiedScore     Float           @default(0)
+  unverifiedScore   Float           @default(0)
+  createdAt         DateTime        @default(now()) @db.Timestamp()
+  deletedAt         DateTime?       @db.Timestamp()
+  reportedCompany   ReportedCompany @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
+  category          Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([reportedCompanyId, categoryId])
+  @@index([reportedCompanyId, categoryId])
+}
+
+enum ReactionType {
+  LIKE
+  DISLIKE
+}
+
+enum ReviewVerificationStatus {
+  NOT_VERIFIED
+  PENDING
+  APPROVED
+  REJECTED
+}
