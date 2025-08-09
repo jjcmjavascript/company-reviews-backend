@@ -30,17 +30,12 @@ export class UserController {
   async findAll() {
     const users = await this.findAllService.execute();
 
-    const normalizedUsers = arrayEntityToHash(users);
-
-    return {
-      users: normalizedUsers,
-    };
+    return users;
   }
 
   @Post()
   @HasRoles(Roles.Admin)
   async create(@Body() userDto: UserCreateDto) {
-    console.log('Creating user:', userDto);
     const result = await this.createService.executeTransaction(
       userDto,
       Roles.User,

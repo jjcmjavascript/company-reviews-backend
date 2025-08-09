@@ -47,6 +47,17 @@ export class User {
     return users.map((user) => new User(user));
   }
 
+  static fromArrayToJsonResponse(
+    users: Array<UserPrimitive>,
+  ): Array<UserPrimitive> {
+    return users.map((user) => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      nickname: user.nickname,
+    }));
+  }
+
   get values() {
     return {
       id: this.attributes.id,
