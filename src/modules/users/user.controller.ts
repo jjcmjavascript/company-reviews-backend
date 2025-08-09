@@ -9,7 +9,6 @@ import {
 import { UserCreateRepository } from './repositories/user-create.repository';
 import { UserFindAllRepository } from './repositories/user-find-all.repository';
 import { UserCreateDto } from './user.dto';
-import { arrayEntityToHash } from '@shared/helpers/array-entity-to-hash.helper';
 import { HasRoles } from '@shared/decorators/user-roles.decorator';
 import { Roles } from '@shared/services/permission/types/roles.enum';
 import { Loged } from '@shared/decorators/loged.decorator';
