@@ -5,6 +5,7 @@ export interface UserPrimitive {
   tax?: string;
   email: string;
   deletedAt?: Date;
+  nickname?: string;
 }
 
 export class User {
@@ -30,7 +31,15 @@ export class User {
       name: this.attributes.name,
       email: this.attributes.email,
       tax: this.attributes.tax,
-      deletedAt: this.attributes.deletedAt,
+    };
+  }
+
+  static toJsonResponse(user: UserPrimitive): Partial<UserPrimitive> {
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      nickname: user.nickname,
     };
   }
 

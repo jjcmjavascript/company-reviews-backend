@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Password } from '@shared/entities/password.entity';
-import { ReviewDetail, ReviewDetailPrimitive } from '@shared/entities/review-details.entity';
+import {
+  ReviewDetail,
+  ReviewDetailPrimitive,
+} from '@shared/entities/review-details.entity';
 
 @Injectable()
 export class ReviewDetailCreateRepository {

@@ -43,9 +43,7 @@ export class Review {
     return reviews.map((review) => new Review(review));
   }
 
-  static toJsonResponse(
-    review: ReviewPrimitive,
-  ): Partial<ReviewPrimitive> {
+  static toJsonResponse(review: ReviewPrimitive): Partial<ReviewPrimitive> {
     return {
       id: review.id,
       userId: review.userId,
@@ -56,7 +54,7 @@ export class Review {
       createdAt: review.createdAt,
       user: review.user,
       reviewDetails: review.reviewDetails,
-    }
+    };
   }
 
   static fromArrayToReviewJsonResponse(

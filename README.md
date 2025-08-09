@@ -61,18 +61,22 @@ Backend para la aplicación Report Company, construido con NestJS, Prisma y Post
 #### Pasos
 
 1.  **Permisos de ejecución para `dev-entry.sh`:**
+
     ```bash
     chmod +x dev-entry.sh
     ```
+
     > **Nota:** Si no puedes dar permisos, descomenta la sección `command` en `docker-compose.yml` y comenta la línea `command: ['./dev-entry.sh']`.
 
 2.  **Injectar seeds (opcional):**
     - Para poblar la base de datos con datos iniciales, asegúrate de que el archivo `seed.json` esté en la raíz del proyecto.
 
 3.  **Levantar los contenedores:**
+
     ```bash
     docker-compose up --build
     ```
+
     - Para ejecutar en segundo plano:
       ```bash
       docker-compose up --build -d
@@ -139,3 +143,18 @@ Backend para la aplicación Report Company, construido con NestJS, Prisma y Post
 - **Desarrollador:** jjcmjavascript
 - **Correo:** jjcmjavascript@gmail.com
 - **LinkedIn:** [jjcmjavascript](https://www.linkedin.com/in/jjcmjavascript/)
+
+### Limpiar docker
+
+docker system df
+docker system prune -a --volumes #incluye volúmenes
+docker compose down --volumes --rmi local --remove-orphans # usando compose
+docker builder prune --all
+
+#### Prune específico
+
+docker container prune # contenedores detenidos
+docker image prune # imágenes dangling
+docker image prune -a # TODAS las imágenes no usadas
+docker network prune # redes sin contenedores
+docker volume prune # volúmenes sin referencia (podrías perder datos)

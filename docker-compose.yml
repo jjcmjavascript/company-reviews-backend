@@ -1,0 +1,40 @@
+
+services:
+  reportedcompanydb:
+    container_name: reportedcompanydb
+    image: postgres:17.5-alpine3.22
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    expose:
+      - ${DATABASE_PORT}
+    ports:
+      - ${DATABASE_PORT}:${DATABASE_PORT}
+    command: -p ${DATABASE_PORT}
+
+  backend:
+    container_name: backend-reportedcompany
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      - PORT=${SERVER_PORT}
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - ./src:/app/src
+    working_dir: /app
+    depends_on:
+      - reportedcompanydb
+    # command: [ "sh", "-c", "npx prisma migrate deploy && npx prisma generate && npm run seed && npm run dev" ]
+    entrypoint: './dev-entry.sh'
+volumes:
+  pgdata:

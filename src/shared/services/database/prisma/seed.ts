@@ -23,22 +23,21 @@ const getCompaniesFromFile = () => {
 };
 
 const getCategories = () => [
-  { name: 'Entrevista' },
-  { name: 'Salario' },
-  { name: 'Cultura' },
-  { name: 'Jefatura' },
-  { name: 'Crecimiento' },
-  { name: 'Tecnologia' },
+  { name: 'Interview' },
+  { name: 'Salary' },
+  { name: 'Culture' },
+  { name: 'Management' },
+  { name: 'Growth' },
+  { name: 'Technology' },
 ];
 
 const getReviewerTypes = () => [
-  { name: 'Sistema' },
-  { name: 'Empleado' },
-  { name: 'Ex-empleado' },
-  { name: 'Postulante' },
+  { name: 'System' },
+  { name: 'Employee' },
+  { name: 'Former Employee' },
+  { name: 'Applicant' },
 ];
 
-// Suppose each reviewer type can have certain categories:
 const getReviewerTypesCategories = (
   reviewerTypes: { id: number; name: string }[],
   categories: { id: number; name: string }[],
@@ -62,10 +61,14 @@ const getReviewerTypesCategories = (
   );
 };
 
-const getReview = (reportedCompanies: { id: number; name: string }[]) => {
+const getReview = (
+  reportedCompanies: { id: number; name: string }[],
+  userId: number,
+  reviewerTypeId: number,
+) => {
   return reportedCompanies.map((company) => ({
-    userId: 1,
-    reviewerTypeId: 1,
+    userId,
+    reviewerTypeId,
     reportedCompanyId: company.id,
     verificationStatus: ReviewVerificationStatus.NOT_VERIFIED,
   }));
@@ -139,7 +142,7 @@ async function main() {
 
     const user = await tx.user.create({
       data: {
-        name: 'Sistema',
+        name: 'Sytem',
         email: 'itsnotjs@gmail.com',
       },
     });
@@ -149,7 +152,9 @@ async function main() {
       categories,
     );
 
-    const reviewRaws = getReview(reportedCompanies);
+    const sytem = reviewerTypes.find((type) => type.name === 'Sytem');
+
+    const reviewRaws = getReview(reportedCompanies, user.id, sytem.id);
 
     await Promise.all([
       tx.password.create({
@@ -170,19 +175,19 @@ async function main() {
         data: reviewerTypesCategories,
         skipDuplicates: true,
       }),
-
-      tx.review.createMany({
-        data: reviewRaws,
-        skipDuplicates: true,
-      }),
     ]);
 
-    // Now find the newly created reviews so we can link details
+    await tx.review.createMany({
+      data: reviewRaws,
+      skipDuplicates: true,
+    });
+
     const insertedReviews = await tx.review.findMany({
-      where: { userId: user.id, reviewerTypeId: 1 },
+      where: { userId: user.id, reviewerTypeId: sytem.id },
     });
 
     const reviewDetails = getReviewDetails(insertedReviews, categories);
+
     await tx.reviewDetail.createMany({
       data: reviewDetails,
       skipDuplicates: true,

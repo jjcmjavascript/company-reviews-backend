@@ -13,7 +13,7 @@ export class ReviewCreateService {
 
   constructor(
     private readonly reviewCreateRepository: ReviewCreateRepository,
-  ) { }
+  ) {}
 
   async execute(params: ReviewCreateDto): Promise<Partial<ReviewPrimitive>> {
     try {
