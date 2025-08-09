@@ -1,4 +1,3 @@
-import { PrismaModule } from '@modules/prisma/prisma.module';
 import { Module } from '@nestjs/common';
 import { ReportedCompanyFindAllRepository } from './repositories/reported-company-find-all.repository';
 import { ReportedCompanyController } from './reported-company.controller';
@@ -11,7 +10,6 @@ import { ReportedCompanyListService } from './service/reported-company-list.serv
 import { ReportedCompanyListQuery } from '@shared/services/queries/reported-company-index/reported-company-index.query';
 
 @Module({
-  imports: [PrismaModule],
   controllers: [ReportedCompanyController],
   providers: [
     ReportedCompanyListQuery,

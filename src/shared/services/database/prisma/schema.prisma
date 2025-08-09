@@ -13,6 +13,7 @@ model User {
   uuid            String?                  @unique @db.VarChar()
   email           String                   @unique @db.VarChar()
   name            String?                  @db.VarChar()
+  nickName        String?                  @db.VarChar()
   lastname        String?                  @db.VarChar()
   tax             String?                  @db.VarChar()
   deletedAt       DateTime?                @db.Timestamp()

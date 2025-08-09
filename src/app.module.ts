@@ -19,6 +19,7 @@ import { ReportedCompanySummaryModule } from '@modules/reported-company-summary/
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtConfig } from '@config/config.interface';
+import { PrismaModule } from '@modules/prisma/prisma.module';
 
 const providers = [];
 
@@ -65,6 +66,7 @@ providers.push({
         };
       },
     }),
+    PrismaModule,
     SentryModule.forRoot(),
     UserModule,
     AuthModule,

@@ -3,18 +3,18 @@ import { JwtService } from '@nestjs/jwt';
 import { PermissionService } from '@services/permision.service';
 import { compare } from '@helpers/hash.helper';
 import { FastifyReply } from 'fastify';
-import { UserFindOneRepository } from '@modules/users/repositories/user-find-one.repository';
 import { PasswordFindOneRepository } from '@modules/password/password-find-one.repository';
 import { Roles } from '@shared/services/permission/types/roles.enum';
 import { UserRolesFindOneRepository } from '@modules/user-roles/repositories/user-roles-find-one.repository';
 import { ConfigService } from '@nestjs/config';
 import { AppConfig, JwtConfig } from '@config/config.interface';
 import { AuthTokens } from '../auth.interfaces';
+import { UserFindOneInternalService } from '@modules/users/services/user-find-one-internal.service';
 
 @Injectable()
 export class AuthJwtSingInRepostory {
   constructor(
-    private userFindOneRepository: UserFindOneRepository,
+    private userFindOneInternalService: UserFindOneInternalService,
     private userRolesFindOneRepository: UserRolesFindOneRepository,
     private passwordFindOneRepository: PasswordFindOneRepository,
     private jwtService: JwtService,
@@ -25,7 +25,7 @@ export class AuthJwtSingInRepostory {
     email: string,
     password: string,
   ): Promise<AuthTokens> {
-    const user = await this.userFindOneRepository.execute({ email }, false);
+    const user = await this.userFindOneInternalService.execute({ email });
     const jwtConfig = this.configService.get<JwtConfig>('jwt');
 
     const userPassword = user

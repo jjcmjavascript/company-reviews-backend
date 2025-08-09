@@ -13,6 +13,7 @@ export interface JwtUser {
 export const CurrentUser = createParamDecorator(
   (data: string | undefined, ctx: ExecutionContext): JwtUser => {
     const request: Request = ctx.switchToHttp().getRequest();
+
     const user = request['user'] as
       | (Omit<JwtUser, 'userId'> & { sub: number })
       | null;
@@ -22,7 +23,7 @@ export const CurrentUser = createParamDecorator(
     }
 
     return {
-      userId: user.sub,
+      userId: Number(user.sub),
       username: user.username,
       scopes: user.scopes,
       iat: user.iat,
