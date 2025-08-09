@@ -1,6 +1,6 @@
 // current-user.decorator.ts
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { Request } from 'express';
+import { FastifyRequest } from 'fastify';
 
 export interface JwtUser {
   userId: number;
@@ -12,7 +12,7 @@ export interface JwtUser {
 
 export const CurrentUser = createParamDecorator(
   (data: string | undefined, ctx: ExecutionContext): JwtUser => {
-    const request: Request = ctx.switchToHttp().getRequest();
+    const request: FastifyRequest = ctx.switchToHttp().getRequest();
 
     const user = request['user'] as
       | (Omit<JwtUser, 'userId'> & { sub: number })
