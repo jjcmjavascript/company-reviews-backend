@@ -18,8 +18,10 @@ export const config = (): Config => ({
   },
   jwt: {
     jwtSecret,
-    jwtExpiresIn: 3600000 / 2,
-    jwtRefreshExpiresIn: 3600000, // 1hr
+    jwtExpiresIn: '30m',
+    jwtRefreshExpiresIn: '1h',
+    accessTtlSec: 60 * 30, // 30 min
+    refreshTtlSec: 60 * 60, // 1 hora
   },
   sentry: {
     dsn: process.env.SENTRY_DSN,

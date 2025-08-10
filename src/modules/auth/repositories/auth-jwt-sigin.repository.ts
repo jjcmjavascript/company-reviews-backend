@@ -82,7 +82,7 @@ export class AuthJwtSingInRepostory {
     response.setCookie('access_token', accessToken, {
       httpOnly: true,
       secure: config.isProduction,
-      maxAge: jwtConfig.jwtExpiresIn,
+      maxAge: jwtConfig.accessTtlSec,
       sameSite: 'strict',
       path: '/',
     });
@@ -90,7 +90,7 @@ export class AuthJwtSingInRepostory {
     response.setCookie('refresh_token', refreshToken, {
       httpOnly: true,
       secure: config.isProduction,
-      maxAge: jwtConfig.jwtRefreshExpiresIn,
+      maxAge: jwtConfig.refreshTtlSec,
       sameSite: 'strict',
       path: '/',
     });

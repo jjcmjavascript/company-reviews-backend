@@ -1,4 +1,4 @@
-import { Config } from '@config/config.interface';
+import { AppConfig, JwtConfig } from '@config/config.interface';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -21,9 +21,11 @@ export class AuthJwtRefreshRepository {
     refreshToken: string,
   ): Promise<Tokens> {
     try {
-      const config = this.configService.get<Config>('config');
+      const jwtConfig = this.configService.get<JwtConfig>('jwt');
+      const appConfig = this.configService.get<AppConfig>('app');
+
       const verifyResult = await this.jwtService.verifyAsync(refreshToken, {
-        secret: config.jwt.jwtSecret,
+        secret: jwtConfig.jwtSecret,
       });
 
       const payload = {
@@ -33,24 +35,24 @@ export class AuthJwtRefreshRepository {
       };
 
       const newAccessToken = await this.jwtService.signAsync(payload, {
-        expiresIn: config.jwt.jwtExpiresIn,
+        expiresIn: jwtConfig.jwtExpiresIn,
       });
 
       const newRefreshToken = await this.jwtService.signAsync(payload, {
-        expiresIn: config.jwt.jwtRefreshExpiresIn,
+        expiresIn: jwtConfig.jwtRefreshExpiresIn,
       });
 
       response.setCookie('access_token', newAccessToken, {
         httpOnly: true,
-        secure: config.app.isProduction,
-        maxAge: config.jwt.jwtExpiresIn,
+        secure: appConfig.isProduction,
+        maxAge: jwtConfig.accessTtlSec,
         sameSite: 'lax',
       });
 
       response.setCookie('refresh_token', newRefreshToken, {
         httpOnly: true,
-        secure: config.app.isProduction,
-        maxAge: config.jwt.jwtRefreshExpiresIn,
+        secure: appConfig.isProduction,
+        maxAge: jwtConfig.refreshTtlSec,
         sameSite: 'lax',
       });
 

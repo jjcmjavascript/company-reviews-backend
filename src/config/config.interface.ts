@@ -11,8 +11,10 @@ export interface CorsConfig {
 
 export interface JwtConfig {
   jwtSecret: string;
-  jwtExpiresIn: number;
-  jwtRefreshExpiresIn: number;
+  jwtExpiresIn: string;
+  jwtRefreshExpiresIn: string;
+  accessTtlSec: number;
+  refreshTtlSec: number;
 }
 
 export interface SentryConfig {
