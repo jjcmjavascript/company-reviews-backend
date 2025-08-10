@@ -7,6 +7,8 @@ import { UserRolesModule } from '@modules/user-roles/user-roles.module';
 import { PasswordModule } from '@modules/password/password.module';
 import { UserFindOneInternalService } from './services/user-find-one-internal.service';
 import { UserFindOneService } from './services/user-find-one-public.service';
+import { UserCanCreateReviewService } from './services/user-can-create-review.service';
+import { UserCanCreateReviewRepository } from './repositories/user-can-create-review.repository';
 
 @Module({
   imports: [UserRolesModule, PasswordModule],
@@ -14,10 +16,16 @@ import { UserFindOneService } from './services/user-find-one-public.service';
   providers: [
     UserCreateRepository,
     UserFindAllRepository,
+    UserCanCreateReviewRepository,
     UserFindOneRepository,
     UserFindOneInternalService,
     UserFindOneService,
+    UserCanCreateReviewService,
   ],
-  exports: [UserFindOneInternalService, UserCreateRepository],
+  exports: [
+    UserFindOneInternalService,
+    UserCreateRepository,
+    UserCanCreateReviewService,
+  ],
 })
 export class UserModule {}

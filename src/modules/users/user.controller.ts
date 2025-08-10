@@ -14,6 +14,7 @@ import { Roles } from '@shared/services/permission/types/roles.enum';
 import { Loged } from '@shared/decorators/loged.decorator';
 import { CurrentUser, JwtUser } from '@shared/decorators/user.decorator';
 import { UserFindOneService } from './services/user-find-one-public.service';
+import { UserCanCreateReviewService } from './services/user-can-create-review.service';
 
 @Controller('users')
 export class UserController {
@@ -21,6 +22,7 @@ export class UserController {
     private readonly findAllService: UserFindAllRepository,
     private readonly createService: UserCreateRepository,
     private readonly findOneService: UserFindOneService,
+    private readonly userCanCreateReviewService: UserCanCreateReviewService,
   ) {}
 
   @Get()
@@ -51,5 +53,17 @@ export class UserController {
     const user = await this.findOneService.execute({ id, currentUser });
 
     return user;
+  }
+
+  @Get('reported-companies/:companyId/can-create-review')
+  @Loged()
+  async canCreateReview(
+    @Param('companyId', ParseIntPipe) reportedCompanyId: number,
+    @CurrentUser() user: JwtUser,
+  ) {
+    return await this.userCanCreateReviewService.execute(
+      user.userId,
+      reportedCompanyId,
+    );
   }
 }
