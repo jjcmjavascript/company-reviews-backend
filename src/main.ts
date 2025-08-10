@@ -12,6 +12,7 @@ import helmet from '@fastify/helmet';
 import { ConfigService } from '@nestjs/config';
 import { LoggingInterceptor } from '@shared/interceptors/logging.interceptor';
 import { AppConfig, CorsConfig } from '@config/config.interface';
+import { AllExceptionsFilter } from '@shared/services/exception.filter.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -34,6 +35,8 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
+
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   app.useGlobalInterceptors(new LoggingInterceptor());
 

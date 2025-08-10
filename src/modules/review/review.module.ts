@@ -6,9 +6,11 @@ import { ReviewController } from './review.controller';
 import { ReviewCreateService } from './services/review-create.service';
 import { ReviewCreateRepository } from './repositories/review-create.repository';
 import { ReviewDetailCreateRepository } from '@modules/review-details/repositories/review-details-create.repositoy';
+import { CategoryModule } from '@modules/category/category.module';
+import { ReviewerTypeModule } from '@modules/reviewer-type/reviewer-type.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, CategoryModule, ReviewerTypeModule],
   providers: [
     ReviewDetailCreateRepository,
     ReviewFindAllRepository,
@@ -19,4 +21,4 @@ import { ReviewDetailCreateRepository } from '@modules/review-details/repositori
   controllers: [ReviewController],
   exports: [ReviewFindAllRepository, ReviewFindAllService],
 })
-export class ReviewModule { }
+export class ReviewModule {}

@@ -8,7 +8,6 @@ export class PasswordCreateRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(userId: number, password: string): Promise<Password> {
-    console.log('Creating password for user', userId);
     const result = await this.prismaService.password.create({
       data: {
         userId,

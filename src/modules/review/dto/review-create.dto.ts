@@ -1,5 +1,8 @@
 import { Type } from 'class-transformer';
 import {
+  ArrayNotEmpty,
+  ArrayUnique,
+  IsArray,
   IsInt,
   IsNotEmpty,
   IsOptional,
@@ -31,7 +34,9 @@ export class ReviewCreateDto {
   })
   description: string;
 
-  @IsNotEmpty({ message: 'Review details are required' })
+  @IsArray({ message: 'Review details are required' })
+  @ArrayNotEmpty({ message: 'Review details are required' })
+  @ArrayUnique({ message: 'Review details must be unique' })
   @ValidateNested({ each: true })
   @Type(() => ReviewDetailCreateDto)
   reviewDetails: Array<ReviewDetailCreateDto>;

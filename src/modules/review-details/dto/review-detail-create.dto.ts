@@ -1,4 +1,13 @@
-import { IsInt, IsNotEmpty, IsOptional, IsString, Max, MaxLength, Min, MinLength } from "class-validator";
+import {
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+} from 'class-validator';
 
 export class ReviewDetailCreateDto {
   @IsNotEmpty({ message: 'Category ID is required' })
@@ -8,7 +17,9 @@ export class ReviewDetailCreateDto {
   @IsOptional()
   @IsString({ message: 'Description must be a string' })
   @MinLength(10, { message: 'Description must be at least 10 characters long' })
-  @MaxLength(400, { message: 'Description must be at most 400 characters long' })
+  @MaxLength(400, {
+    message: 'Description must be at most 400 characters long',
+  })
   description?: string;
 
   @IsNotEmpty({ message: 'Score is required' })

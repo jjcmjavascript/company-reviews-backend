@@ -64,7 +64,6 @@ class UserCreateRepository {
 
       return newUser;
     } catch (e) {
-      console.log(e);
       throw new InternalServerErrorException(
         'An unexpected error occurred during user creation',
       );

@@ -15,6 +15,7 @@ import { ReviewReactionModule } from '@modules/review-reaction/review-reaction.m
 import { ReviewModule } from '@modules/review/review.module';
 import { ReviewDetailsModule } from '@modules/review-details/review-details.module';
 import { CategoryModule } from '@modules/category/category.module';
+import { ReviewerTypeCategoryModule } from '@modules/reviewer-type-category/reviewer-type-category.module';
 import { ReviewerTypeModule } from '@modules/reviewer-type/reviewer-type.module';
 import { ReportedCompanySummaryModule } from '@modules/reported-company-summary/reported-company-summary.module';
 
@@ -80,6 +81,7 @@ providers.push({
     CategoryModule,
     ReportedCompanySummaryModule,
     ReviewerTypeModule,
+    ReviewerTypeCategoryModule,
   ],
   controllers: [],
   providers,
