@@ -11,29 +11,17 @@ export class ReviewerTypeCategory {
     this.attributes = reviewerTypeCategory;
   }
 
-  static create(
-    reviewerTypeCategory: ReviewerTypeCategoryPrimitive,
-  ): ReviewerTypeCategory {
-    return new ReviewerTypeCategory({
-      id: reviewerTypeCategory.id!,
-      typeId: reviewerTypeCategory.typeId!,
-      categoryId: reviewerTypeCategory.categoryId!,
-    });
-  }
-
-  toPrimitive(): ReviewerTypeCategoryPrimitive {
-    return this.attributes;
-  }
-
-  static fromArray(
-    reviewerTypeCategories: Array<ReviewerTypeCategoryPrimitive>,
-  ): Array<ReviewerTypeCategory> {
-    return reviewerTypeCategories.map(
-      (reviewerTypeCategory) => new ReviewerTypeCategory(reviewerTypeCategory),
-    );
-  }
-
   get values() {
     return this.attributes;
+  }
+
+  static toJsonResponse(
+    reviewerTypeCategory: Partial<ReviewerTypeCategoryPrimitive>,
+  ): Partial<ReviewerTypeCategoryPrimitive> {
+    return {
+      id: reviewerTypeCategory.id,
+      typeId: reviewerTypeCategory.typeId,
+      categoryId: reviewerTypeCategory.categoryId,
+    };
   }
 }

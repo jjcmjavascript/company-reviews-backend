@@ -8,9 +8,15 @@ import { ReviewCreateRepository } from './repositories/review-create.repository'
 import { ReviewDetailCreateRepository } from '@modules/review-details/repositories/review-details-create.repositoy';
 import { CategoryModule } from '@modules/category/category.module';
 import { ReviewerTypeModule } from '@modules/reviewer-type/reviewer-type.module';
+import { ReviewerTypeCategoryModule } from '@modules/reviewer-type-category/reviewer-type-category.module';
 
 @Module({
-  imports: [PrismaModule, CategoryModule, ReviewerTypeModule],
+  imports: [
+    PrismaModule,
+    CategoryModule,
+    ReviewerTypeModule,
+    ReviewerTypeCategoryModule,
+  ],
   providers: [
     ReviewDetailCreateRepository,
     ReviewFindAllRepository,
