@@ -8,6 +8,7 @@ import { ReviewCreateRepository } from './repositories/review-create.repository'
 import { ReviewDetailCreateRepository } from '@modules/review-details/repositories/review-details-create.repositoy';
 import { CategoryModule } from '@modules/category/category.module';
 import { ReviewerTypeModule } from '@modules/reviewer-type/reviewer-type.module';
+import { ReportedCompanyModule } from '@modules/reported-company/reported-company.module';
 import { ReviewerTypeCategoryModule } from '@modules/reviewer-type-category/reviewer-type-category.module';
 
 @Module({
@@ -16,6 +17,7 @@ import { ReviewerTypeCategoryModule } from '@modules/reviewer-type-category/revi
     CategoryModule,
     ReviewerTypeModule,
     ReviewerTypeCategoryModule,
+    ReportedCompanyModule,
   ],
   providers: [
     ReviewDetailCreateRepository,

@@ -21,6 +21,6 @@ import { ReportedCompanyListQuery } from '@shared/services/queries/reported-comp
     ReportedCompanySearchService,
     ReportedCompanyListService,
   ],
-  exports: [ReportedCompanyFindAllRepository],
+  exports: [ReportedCompanyFindAllRepository, ReportedCompanyFindService],
 })
 export class ReportedCompanyModule {}

@@ -10,6 +10,7 @@ import { CategoryFindAllService } from '@modules/category/services/category-find
 import { ReviewerTypeFindByIdService } from '@modules/reviewer-type/services/reviewer-type-find-by-id.service';
 import { ReviewerTypeCategoryFindAllService } from '@modules/reviewer-type-category/services/reviewer-type-category-find-all.service';
 import { ReviewFindAllRepository } from '../repositories/review-find-all.repository';
+import { ReportedCompanyFindService } from '@modules/reported-company/service/reported-company-find.service';
 import { JwtUser } from '@shared/decorators/user.decorator';
 
 @Injectable()
@@ -20,6 +21,7 @@ export class ReviewCreateService {
     private readonly categoriesFindAllService: CategoryFindAllService,
     private readonly reviewerTypeFindByIdService: ReviewerTypeFindByIdService,
     private readonly reviewerTypeCategoryFindAllService: ReviewerTypeCategoryFindAllService,
+    private readonly reportedCompanyFindService: ReportedCompanyFindService,
   ) {}
 
   async execute(
@@ -27,6 +29,7 @@ export class ReviewCreateService {
     currentUser: JwtUser,
   ): Promise<Partial<ReviewPrimitive>> {
     //TODO: verificar que exista la compañia , hacer que un review sea unico por usuario y compania, validar quien crea sea el usuario logeado
+    await this.validateCompany(params.reportedCompanyId);
     await this.validateReviewerType(params.reviewerTypeId);
 
     await this.validateCategories(params.reviewDetails, params.reviewerTypeId);
@@ -77,6 +80,16 @@ export class ReviewCreateService {
 
     if (!reviewerType) {
       throw new BadRequestException(`Invalid reviewer type`);
+    }
+  }
+
+  private async validateCompany(companyId: number) {
+    const company = await this.reportedCompanyFindService.execute({
+      id: companyId,
+    });
+
+    if (!company) {
+      throw new BadRequestException(`Invalid company`);
     }
   }
 
