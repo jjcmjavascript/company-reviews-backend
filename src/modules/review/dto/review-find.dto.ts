@@ -1,3 +1,3 @@
-import { PaginateDto } from "@shared/dto/paginate.dto";
+import { PaginateDto } from '@shared/dto/paginate.dto';
 
-export class ReviewFindDto extends PaginateDto { }
+export class ReviewFindDto extends PaginateDto {}

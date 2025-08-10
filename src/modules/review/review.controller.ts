@@ -11,6 +11,8 @@ import { ReviewCreateDto } from './dto/review-create.dto';
 import { ReviewCreateService } from './services/review-create.service';
 import { ReviewFindDto } from './dto/review-find.dto';
 import { ReviewFindAllService } from './services/review-find-all.service';
+import { CurrentUser, JwtUser } from '@shared/decorators/user.decorator';
+import { Loged } from '@shared/decorators/loged.decorator';
 
 @Controller('reviews/company')
 export class ReviewController {
@@ -28,7 +30,11 @@ export class ReviewController {
   }
 
   @Post()
-  async create(@Body() review: ReviewCreateDto) {
-    return this.createService.execute(review);
+  @Loged()
+  async create(
+    @Body() review: ReviewCreateDto,
+    @CurrentUser() currentUser: JwtUser,
+  ) {
+    return this.createService.execute(review, currentUser);
   }
 }

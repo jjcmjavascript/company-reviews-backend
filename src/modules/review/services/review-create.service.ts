@@ -1,8 +1,7 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
-  InternalServerErrorException,
-  Logger,
 } from '@nestjs/common';
 import { ReviewCreateDto } from '../dto/review-create.dto';
 import { ReviewCreateRepository } from '../repositories/review-create.repository';
@@ -10,35 +9,39 @@ import { Review, ReviewPrimitive } from '@shared/entities/review.entity';
 import { CategoryFindAllService } from '@modules/category/services/category-find-all.service';
 import { ReviewerTypeFindByIdService } from '@modules/reviewer-type/services/reviewer-type-find-by-id.service';
 import { ReviewerTypeCategoryFindAllService } from '@modules/reviewer-type-category/services/reviewer-type-category-find-all.service';
+import { ReviewFindAllRepository } from '../repositories/review-find-all.repository';
+import { JwtUser } from '@shared/decorators/user.decorator';
 
 @Injectable()
 export class ReviewCreateService {
-  private readonly logger = new Logger(ReviewCreateService.name);
-
   constructor(
     private readonly reviewCreateRepository: ReviewCreateRepository,
+    private readonly reviewFindService: ReviewFindAllRepository,
     private readonly categoriesFindAllService: CategoryFindAllService,
     private readonly reviewerTypeFindByIdService: ReviewerTypeFindByIdService,
     private readonly reviewerTypeCategoryFindAllService: ReviewerTypeCategoryFindAllService,
   ) {}
 
-  async execute(params: ReviewCreateDto): Promise<Partial<ReviewPrimitive>> {
+  async execute(
+    params: ReviewCreateDto,
+    currentUser: JwtUser,
+  ): Promise<Partial<ReviewPrimitive>> {
+    //TODO: verificar que exista la compañia , hacer que un review sea unico por usuario y compania, validar quien crea sea el usuario logeado
     await this.validateReviewerType(params.reviewerTypeId);
 
     await this.validateCategories(params.reviewDetails, params.reviewerTypeId);
 
-    try {
-      const result = await this.reviewCreateRepository.execute(params);
+    await this.validatePreviousReview(
+      currentUser.userId,
+      params.reportedCompanyId,
+    );
 
-      return Review.toJsonResponse(result);
-    } catch (error: unknown) {
-      this.logger.error({
-        message: (error as Error).message,
-        error: (error as Error).stack,
-      });
+    const result = await this.reviewCreateRepository.execute({
+      ...params,
+      userId: currentUser.userId,
+    });
 
-      throw new InternalServerErrorException('Error on create review');
-    }
+    return Review.toJsonResponse(result);
   }
 
   private async validateCategories(
@@ -74,6 +77,16 @@ export class ReviewCreateService {
 
     if (!reviewerType) {
       throw new BadRequestException(`Invalid reviewer type`);
+    }
+  }
+
+  private async validatePreviousReview(userId: number, companyId: number) {
+    const previousReview = await this.reviewFindService.execute({
+      where: { reportedCompanyId: companyId, userId },
+    });
+
+    if (previousReview && previousReview.length > 0) {
+      throw new ConflictException(`Review already exists`);
     }
   }
 }

@@ -33,7 +33,6 @@ export class UserController {
   }
 
   @Post()
-  @HasRoles(Roles.Admin)
   async create(@Body() userDto: UserCreateDto) {
     const result = await this.createService.executeTransaction(
       userDto,

@@ -5,7 +5,6 @@ import {
   IsArray,
   IsInt,
   IsNotEmpty,
-  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -14,10 +13,6 @@ import {
 import { ReviewDetailCreateDto } from '@modules/review-details/dto/review-detail-create.dto';
 
 export class ReviewCreateDto {
-  @IsOptional()
-  @IsInt({ message: 'User ID must be an integer' })
-  userId: number;
-
   @IsNotEmpty({ message: 'Company is required' })
   @IsInt({ message: 'Company ID must be an integer' })
   reportedCompanyId: number;
