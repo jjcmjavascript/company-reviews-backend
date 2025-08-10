@@ -28,8 +28,8 @@ export class ReviewCreateService {
     params: ReviewCreateDto,
     currentUser: JwtUser,
   ): Promise<Partial<ReviewPrimitive>> {
-    //TODO: verificar que exista la compañia , hacer que un review sea unico por usuario y compania, validar quien crea sea el usuario logeado
     await this.validateCompany(params.reportedCompanyId);
+
     await this.validateReviewerType(params.reviewerTypeId);
 
     await this.validateCategories(params.reviewDetails, params.reviewerTypeId);
