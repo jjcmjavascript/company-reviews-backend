@@ -12,6 +12,8 @@ import { ReviewerTypeCategoryFindAllService } from '@modules/reviewer-type-categ
 import { ReviewFindAllRepository } from '../repositories/review-find-all.repository';
 import { ReportedCompanyFindService } from '@modules/reported-company/service/reported-company-find.service';
 import { JwtUser } from '@shared/decorators/user.decorator';
+import { CompanyCategoryScoreCreateService } from '@modules/company-category-score/services/company-category-score-create.service';
+import { ReviewVerificationStatus } from '@shared/enums/commons.enum';
 
 @Injectable()
 export class ReviewCreateService {
@@ -22,6 +24,7 @@ export class ReviewCreateService {
     private readonly reviewerTypeFindByIdService: ReviewerTypeFindByIdService,
     private readonly reviewerTypeCategoryFindAllService: ReviewerTypeCategoryFindAllService,
     private readonly reportedCompanyFindService: ReportedCompanyFindService,
+    private readonly companyCategoryScoreCreateService: CompanyCategoryScoreCreateService,
   ) {}
 
   async execute(
@@ -44,6 +47,13 @@ export class ReviewCreateService {
       userId: currentUser.userId,
     });
 
+    await this.companyCategoryScoreCreateService.execute({
+      review: {
+        reportedCompanyId: params.reportedCompanyId,
+        verificationStatus: ReviewVerificationStatus.NOT_VERIFIED,
+      },
+      reviewDetails: params.reviewDetails,
+    });
     return Review.toJsonResponse(result);
   }
 

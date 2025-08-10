@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ReviewVerificationStatus } from '@shared/enums/commons.enum';
 import { PrismaService } from '@shared/services/database/prisma/prisma.service';
 
 @Injectable()
@@ -15,49 +16,80 @@ export class CompanyCategoryScoreCreateRepository {
       verificationStatus: string;
     },
   ) {
-    return this.prismaService.$transaction(async (tx) => {
-      for (const d of reviewDetails) {
-        const isVerified = review.verificationStatus === 'APPROVED';
+    const categoriesIds = reviewDetails.map((detail) => detail.categoryId);
+    const previousScores =
+      await this.prismaService.companyCategoryScore.findMany({
+        where: {
+          reportedCompanyId: review.reportedCompanyId,
+          categoryId: {
+            in: categoriesIds,
+          },
+        },
+      });
 
-        return await tx.companyCategoryScore.upsert({
-          where: {
-            reportedCompanyId_categoryId: {
-              reportedCompanyId: review.reportedCompanyId,
-              categoryId: d.categoryId,
+    const toProcess: Promise<any>[] = [];
+    //TODO: verificar que esto este correcto, ademas volver a pensar que hacer con los verificados
+    for (const detail of reviewDetails) {
+      const previousScore = previousScores.find(
+        (score) => score.categoryId === detail.categoryId,
+      );
+
+      if (previousScore) {
+        const unverifiedSum =
+          review.verificationStatus === ReviewVerificationStatus.NOT_VERIFIED
+            ? previousScore.unverifiedSum + detail.score
+            : previousScore.unverifiedSum;
+        const unverifiedCount =
+          review.verificationStatus === ReviewVerificationStatus.NOT_VERIFIED
+            ? previousScore.unverifiedCount + 1
+            : previousScore.unverifiedCount;
+
+        const unverifiedScore =
+          review.verificationStatus === ReviewVerificationStatus.NOT_VERIFIED
+            ? unverifiedSum / unverifiedCount
+            : previousScore.unverifiedScore;
+
+        const verifiedSum =
+          review.verificationStatus === ReviewVerificationStatus.APPROVED
+            ? previousScore.verifiedSum + detail.score
+            : previousScore.verifiedSum;
+        const verifiedCount =
+          review.verificationStatus === ReviewVerificationStatus.APPROVED
+            ? previousScore.verifiedCount + 1
+            : previousScore.verifiedCount;
+
+        const verifiedScore =
+          review.verificationStatus === ReviewVerificationStatus.APPROVED
+            ? verifiedSum / verifiedCount
+            : previousScore.verifiedScore;
+
+        toProcess.push(
+          this.prismaService.companyCategoryScore.update({
+            where: {
+              id: previousScore.id,
             },
-          },
-          create: {
-            reportedCompanyId: review.reportedCompanyId,
-            categoryId: d.categoryId,
-            verifiedCount: isVerified ? 1 : 0,
-            verifiedSum: isVerified ? d.score : 0,
-            unverifiedCount: isVerified ? 0 : 1,
-            unverifiedSum: isVerified ? 0 : d.score,
-            verifiedScore: isVerified ? d.score : 0,
-            unverifiedScore: isVerified ? 0 : d.score,
-          },
-          update: {
-            verifiedCount: { increment: isVerified ? 1 : 0 },
-            verifiedSum: { increment: isVerified ? d.score : 0 },
-            unverifiedCount: { increment: isVerified ? 0 : 1 },
-            unverifiedSum: { increment: isVerified ? 0 : d.score },
-            verifiedScore: {
-              set: tx.$executeRaw`(SELECT CASE WHEN verifiedCount + ${isVerified ? 1 : 0} = 0
-            THEN 0
-            ELSE (verifiedSum + ${isVerified ? d.score : 0})::float / (verifiedCount + ${isVerified ? 1 : 0})
-          END FROM "CompanyCategoryScore"
-          WHERE "reportedCompanyId"=${review.reportedCompanyId} AND "categoryId"=${d.categoryId})` as any,
+            data: {
+              unverifiedSum,
+              unverifiedCount,
+              unverifiedScore,
+              verifiedSum,
+              verifiedCount,
+              verifiedScore,
             },
-            unverifiedScore: {
-              set: tx.$executeRaw`(SELECT CASE WHEN unverifiedCount + ${isVerified ? 0 : 1} = 0
-            THEN 0
-            ELSE (unverifiedSum + ${isVerified ? 0 : d.score})::float / (unverifiedCount + ${isVerified ? 0 : 1})
-          END FROM "CompanyCategoryScore"
-          WHERE "reportedCompanyId"=${review.reportedCompanyId} AND "categoryId"=${d.categoryId})` as any,
-            },
-          },
-        });
+          }),
+        );
       }
+    }
+
+    await Promise.all(toProcess);
+
+    return this.prismaService.companyCategoryScore.findMany({
+      where: {
+        reportedCompanyId: review.reportedCompanyId,
+        categoryId: {
+          in: categoriesIds,
+        },
+      },
     });
   }
 }

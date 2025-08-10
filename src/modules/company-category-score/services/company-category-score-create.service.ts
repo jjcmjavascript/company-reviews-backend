@@ -18,6 +18,6 @@ export class CompanyCategoryScoreCreateService {
       },
     );
 
-    return CompanyCategoryScoreEntity.toJsonResponse(result);
+    return CompanyCategoryScoreEntity.fromArrayToJsonResponse(result);
   }
 }

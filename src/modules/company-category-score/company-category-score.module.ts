@@ -1,10 +1,17 @@
 import { Module } from '@nestjs/common';
 import { CompanyCategoryScoreCreateService } from './services/company-category-score-create.service';
+import { CompanyCategoryScoreCreateRepository } from './repositories/company-category-score-create.repository';
 
 @Module({
-  providers: [CompanyCategoryScoreCreateService],
+  providers: [
+    CompanyCategoryScoreCreateRepository,
+    CompanyCategoryScoreCreateService,
+  ],
   controllers: [],
-  exports: [CompanyCategoryScoreCreateService],
+  exports: [
+    CompanyCategoryScoreCreateRepository,
+    CompanyCategoryScoreCreateService,
+  ],
   imports: [],
 })
 export class CompanyCategoryScoreModule {}
