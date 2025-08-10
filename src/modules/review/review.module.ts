@@ -10,6 +10,7 @@ import { CategoryModule } from '@modules/category/category.module';
 import { ReviewerTypeModule } from '@modules/reviewer-type/reviewer-type.module';
 import { ReportedCompanyModule } from '@modules/reported-company/reported-company.module';
 import { ReviewerTypeCategoryModule } from '@modules/reviewer-type-category/reviewer-type-category.module';
+import { CompanyCategoryScoreModule } from '@modules/company-category-score/company-category-score.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ReviewerTypeCategoryModule } from '@modules/reviewer-type-category/revi
     ReviewerTypeModule,
     ReviewerTypeCategoryModule,
     ReportedCompanyModule,
+    CompanyCategoryScoreModule,
   ],
   providers: [
     ReviewDetailCreateRepository,

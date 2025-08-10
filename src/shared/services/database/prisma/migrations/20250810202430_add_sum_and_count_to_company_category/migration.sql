@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "public"."CompanyCategoryScore" ADD COLUMN     "unverifiedCount" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "unverifiedSum" DOUBLE PRECISION NOT NULL DEFAULT 0,
+ADD COLUMN     "verifiedCount" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "verifiedSum" DOUBLE PRECISION NOT NULL DEFAULT 0;

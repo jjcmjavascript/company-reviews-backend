@@ -36,10 +36,10 @@ export class ReviewDetail {
   ): Partial<ReviewDetailPrimitive> {
     return {
       id: reviewDetail.id,
-			categoryId: reviewDetail.categoryId,
-			score: reviewDetail.score,
-			reviewId: reviewDetail.reviewId,
-    }
+      categoryId: reviewDetail.categoryId,
+      score: reviewDetail.score,
+      reviewId: reviewDetail.reviewId,
+    };
   }
 
   static fromArrayToJsonResponse(

@@ -156,15 +156,20 @@ model CompanySearch {
 }
 
 model CompanyCategoryScore {
-  id                Int             @id @default(autoincrement())
+  id                Int   @id @default(autoincrement())
   reportedCompanyId Int
   categoryId        Int
-  verifiedScore     Float           @default(0)
-  unverifiedScore   Float           @default(0)
-  createdAt         DateTime        @default(now()) @db.Timestamp()
-  deletedAt         DateTime?       @db.Timestamp()
-  reportedCompany   ReportedCompany @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
-  category          Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  verifiedScore     Float @default(0)
+  unverifiedScore   Float @default(0)
+  verifiedCount     Int   @default(0)
+  unverifiedCount   Int   @default(0)
+  verifiedSum       Float @default(0)
+  unverifiedSum     Float @default(0)
+
+  createdAt       DateTime        @default(now()) @db.Timestamp()
+  deletedAt       DateTime?       @db.Timestamp()
+  reportedCompany ReportedCompany @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
+  category        Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   @@unique([reportedCompanyId, categoryId])
   @@index([reportedCompanyId, categoryId])
