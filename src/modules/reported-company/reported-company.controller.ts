@@ -29,17 +29,11 @@ export class ReportedCompanyController {
     private readonly reportedCompanyFindService: ReportedCompanyFindService,
   ) {}
 
-  /**
-   * Endpoint usado en la búsqueda de empresas reportadas.
-   */
   @Get()
   async search(@Query() params: ReportedCompanySearchServiceDto) {
     return await this.reportedCompanySearchService.execute(params);
   }
 
-  /**
-   * Endpoint usado para listar las empresas reportadas
-   */
   @Get('list')
   async list(@Query() params: ReportedCompanyListServiceDto) {
     return await this.reportedCompanyListService.execute(params);
