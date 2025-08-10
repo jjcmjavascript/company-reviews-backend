@@ -44,9 +44,9 @@ const getReviewerTypesCategories = (
 ) => {
   const categoriesByType = reviewerTypes.map((reviewerType) => {
     const categoryIds =
-      reviewerType.name === 'Postulante'
+      reviewerType.name === 'Applicant'
         ? categories
-            .filter((cat) => ['Entrevista', 'Salario'].includes(cat.name))
+            .filter((cat) => ['Interview', 'Salary'].includes(cat.name))
             .map((cat) => cat.id)
         : categories.map((cat) => cat.id);
 

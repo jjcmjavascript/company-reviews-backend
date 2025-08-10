@@ -1,6 +1,6 @@
 export interface ReviewerTypeCategoryPrimitive {
   id: number;
-  typeId: number;
+  reviewerTypeId: number;
   categoryId: number;
 }
 
@@ -20,8 +20,16 @@ export class ReviewerTypeCategory {
   ): Partial<ReviewerTypeCategoryPrimitive> {
     return {
       id: reviewerTypeCategory.id,
-      typeId: reviewerTypeCategory.typeId,
+      reviewerTypeId: reviewerTypeCategory.reviewerTypeId,
       categoryId: reviewerTypeCategory.categoryId,
     };
+  }
+
+  static toJsonResponseFromArray(
+    reviewerTypeCategories: Partial<ReviewerTypeCategoryPrimitive>[],
+  ): Partial<ReviewerTypeCategoryPrimitive>[] {
+    return reviewerTypeCategories.map((category) =>
+      ReviewerTypeCategory.toJsonResponse(category),
+    );
   }
 }
