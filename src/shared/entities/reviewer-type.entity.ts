@@ -1,6 +1,7 @@
 export interface ReviewerTypePrimitive {
   id: number;
   name: string;
+  createdAt: Date;
   deletedAt?: Date;
 }
 
@@ -13,8 +14,9 @@ export class ReviewerType {
 
   static create(reviewerType: Partial<ReviewerTypePrimitive>): ReviewerType {
     return new ReviewerType({
-      id: reviewerType.id!,
-      name: reviewerType.name!,
+      id: reviewerType.id,
+      name: reviewerType.name,
+      createdAt: reviewerType.createdAt,
       deletedAt: reviewerType.deletedAt,
     });
   }
@@ -27,6 +29,27 @@ export class ReviewerType {
     reviewerTypes: Array<ReviewerTypePrimitive>,
   ): Array<ReviewerType> {
     return reviewerTypes.map((reviewerType) => new ReviewerType(reviewerType));
+  }
+
+  static toJsonResponse(
+    reviewerType: ReviewerTypePrimitive,
+  ): Partial<ReviewerTypePrimitive> {
+    return {
+      id: reviewerType.id,
+      name: reviewerType.name,
+      createdAt: reviewerType.createdAt,
+    };
+  }
+
+  static fromArrayToReviewerTypeJsonResponse(
+    reviewerTypes: Array<ReviewerTypePrimitive>,
+  ): Array<Partial<ReviewerTypePrimitive>> {
+    return reviewerTypes.map((reviewerType) => {
+      return {
+        id: reviewerType.id,
+        name: reviewerType.name,
+      };
+    });
   }
 
   get values() {
