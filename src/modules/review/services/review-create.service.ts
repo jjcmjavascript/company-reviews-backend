@@ -23,8 +23,9 @@ export class ReviewCreateService {
   ) {}
 
   async execute(params: ReviewCreateDto): Promise<Partial<ReviewPrimitive>> {
-    await this.validateCategories(params.reviewDetails, params.reviewerTypeId);
     await this.validateReviewerType(params.reviewerTypeId);
+
+    await this.validateCategories(params.reviewDetails, params.reviewerTypeId);
 
     try {
       const result = await this.reviewCreateRepository.execute(params);
@@ -54,7 +55,6 @@ export class ReviewCreateService {
         },
       });
 
-    console.log('reviewerTypeCategories', reviewerTypeCategories);
     const invalidCategoryIds = categoryIds.filter(
       (id) => !categoriesInDb.some((category) => category.id === id),
     );

@@ -142,7 +142,7 @@ async function main() {
 
     const user = await tx.user.create({
       data: {
-        name: 'Sytem',
+        name: 'System',
         email: 'itsnotjs@gmail.com',
       },
     });
@@ -152,9 +152,9 @@ async function main() {
       categories,
     );
 
-    const sytem = reviewerTypes.find((type) => type.name === 'Sytem');
+    const system = reviewerTypes.find((type) => type.name === 'System');
 
-    const reviewRaws = getReview(reportedCompanies, user.id, sytem.id);
+    const reviewRaws = getReview(reportedCompanies, user.id, system.id);
 
     await Promise.all([
       tx.password.create({
@@ -183,7 +183,7 @@ async function main() {
     });
 
     const insertedReviews = await tx.review.findMany({
-      where: { userId: user.id, reviewerTypeId: sytem.id },
+      where: { userId: user.id, reviewerTypeId: system.id },
     });
 
     const reviewDetails = getReviewDetails(insertedReviews, categories);
