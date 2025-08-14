@@ -12,7 +12,11 @@ import { UserCreateDto } from './user.dto';
 import { HasRoles } from '@shared/decorators/user-roles.decorator';
 import { Roles } from '@shared/services/permission/types/roles.enum';
 import { Loged } from '@shared/decorators/loged.decorator';
-import { CurrentUser, JwtUser } from '@shared/decorators/user.decorator';
+import {
+  CurrentUser,
+  CurrentUserOrNull,
+  JwtUser,
+} from '@shared/decorators/user.decorator';
 import { UserFindOneService } from './services/user-find-one-public.service';
 import { UserCanCreateReviewService } from './services/user-can-create-review.service';
 
@@ -56,13 +60,12 @@ export class UserController {
   }
 
   @Get('reported-companies/:companyId/can-create-review')
-  @Loged()
   async canCreateReview(
     @Param('companyId', ParseIntPipe) reportedCompanyId: number,
-    @CurrentUser() user: JwtUser,
+    @CurrentUserOrNull() user: JwtUser | null,
   ) {
     return await this.userCanCreateReviewService.execute(
-      user.userId,
+      user,
       reportedCompanyId,
     );
   }
