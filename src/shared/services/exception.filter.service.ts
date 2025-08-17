@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Logger,
 } from '@nestjs/common';
+import { ThrottlerException } from '@nestjs/throttler';
 import { FastifyReply, FastifyRequest } from 'fastify';
 
 @Catch()
@@ -35,6 +36,12 @@ export class AllExceptionsFilter implements ExceptionFilter {
       !ignoredRoutes.includes(req?.url) && (exception as Error)?.stack,
     );
 
+    if (exception instanceof ThrottlerException) {
+      return res.status(HttpStatus.TOO_MANY_REQUESTS).send({
+        statusCode: HttpStatus.TOO_MANY_REQUESTS,
+        message: 'Too many requests',
+      });
+    }
     const payload = isHttp
       ? (exception as HttpException).getResponse()
       : { statusCode: status, message };

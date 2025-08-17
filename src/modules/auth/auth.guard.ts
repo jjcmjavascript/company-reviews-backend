@@ -12,6 +12,7 @@ import { IS_LOGED_KEY } from '@shared/decorators/loged.decorator';
 import { ConfigService } from '@nestjs/config';
 import { JwtConfig } from '@config/config.interface';
 import { FastifyReply, FastifyRequest } from 'fastify';
+import { extractTokenFromHeader } from '@shared/helpers/extract-token.helper';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -29,22 +30,21 @@ export class AuthGuard implements CanActivate {
       context.getHandler(),
     );
 
-    if (!hasTobeLoged) {
-      return true;
-    }
-
     const request = context.switchToHttp().getRequest<FastifyRequest>();
     const response = context.switchToHttp().getResponse<FastifyReply>();
-    const token = this.extractTokenFromHeader(request, 'access_token');
+    const token = extractTokenFromHeader(request, 'access_token');
 
     try {
-      if (!token) {
-        throw new UnauthorizedException('Invalid token');
+      if (!token && hasTobeLoged) {
+        throw new UnauthorizedException('Invalid session');
+      } else if (!token && !hasTobeLoged) {
+        return true;
       }
 
       const payload = await this.jwtService.verifyAsync(token, {
         secret: config.jwtSecret,
       });
+
       request['user'] = payload;
     } catch {
       const result = await this.tryRefreshToken(request, response);
@@ -53,7 +53,7 @@ export class AuthGuard implements CanActivate {
         return true;
       }
 
-      throw new UnauthorizedException('Invalid token');
+      throw new UnauthorizedException('Invalid session');
     }
 
     return true;
@@ -65,10 +65,7 @@ export class AuthGuard implements CanActivate {
   ): Promise<boolean> {
     try {
       const config = this.configService.get<JwtConfig>('jwt');
-      const refreshToken = this.extractTokenFromHeader(
-        request,
-        'refresh_token',
-      );
+      const refreshToken = extractTokenFromHeader(request, 'refresh_token');
 
       if (refreshToken) {
         const payload = await this.refreshTokenRepository.refreshTokens(
@@ -88,32 +85,5 @@ export class AuthGuard implements CanActivate {
     } catch {
       return false;
     }
-  }
-
-  private extractTokenFromHeader(
-    request: FastifyRequest,
-    tokenName: string,
-  ): string | null {
-    const authHeader = request.headers.authorization;
-    if (
-      authHeader &&
-      authHeader.startsWith('Bearer ') &&
-      tokenName === 'access_token'
-    ) {
-      return authHeader.split(' ')[1];
-    }
-
-    // Si no está en el header, buscar en las cookies (para web)
-    const { access_token, refresh_token } = request.cookies;
-
-    if (tokenName === 'access_token') {
-      return access_token || null;
-    }
-
-    if (tokenName === 'refresh_token') {
-      return refresh_token || null;
-    }
-
-    return null;
   }
 }

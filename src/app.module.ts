@@ -8,7 +8,7 @@ import { UserModule } from './modules/users/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { ReportedCompanyModule } from '@modules/reported-company/reported-company.module';
-import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { UserRolesGuard } from './modules/user-roles/user-roles.guard';
 import { UserRolesModule } from '@modules/user-roles/user-roles.module';
 import { ReviewReactionModule } from '@modules/review-reaction/review-reaction.module';
@@ -43,15 +43,22 @@ providers.push({
   useClass: UserRolesGuard,
 });
 
+providers.push({
+  provide: 'APP_GUARD',
+  useClass: ThrottlerGuard,
+});
+
 @Module({
   imports: [
-    ThrottlerModule.forRoot([
-      {
-        ttl: 100,
-        limit: 10,
-        blockDuration: 120000,
-      },
-    ]),
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000,
+          limit: 20,
+          blockDuration: 180000,
+        },
+      ],
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [config],
