@@ -47,8 +47,9 @@ providers.push({
   imports: [
     ThrottlerModule.forRoot([
       {
-        ttl: 60000,
+        ttl: 100,
         limit: 10,
+        blockDuration: 120000,
       },
     ]),
     ConfigModule.forRoot({

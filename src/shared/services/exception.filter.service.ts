@@ -28,10 +28,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
       ? (exception as HttpException).message
       : 'Internal server error';
 
-    // Tu logging central:
+    const ignoredRoutes = ['/is_logged'];
+
     this.logger.error(
       `exception.filter.service: (${status}) ${req.method} ${req.url} - ${message}`,
-      (exception as any)?.stack,
+      !ignoredRoutes.includes(req?.url) && (exception as Error)?.stack,
     );
 
     const payload = isHttp

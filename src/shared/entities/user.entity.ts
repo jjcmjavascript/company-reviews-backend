@@ -58,7 +58,7 @@ export class User {
     }));
   }
 
-  get values() {
+  get values(): UserPrimitive {
     return {
       id: this.attributes.id,
       name: this.attributes.name,

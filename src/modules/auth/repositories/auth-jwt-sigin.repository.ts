@@ -10,6 +10,7 @@ import { ConfigService } from '@nestjs/config';
 import { AppConfig, JwtConfig } from '@config/config.interface';
 import { AuthTokens } from '../auth.interfaces';
 import { UserFindOneInternalService } from '@modules/users/services/user-find-one-internal.service';
+import { UserPrimitive } from '@shared/entities/user.entity';
 
 @Injectable()
 export class AuthJwtSingInRepostory {
@@ -21,12 +22,8 @@ export class AuthJwtSingInRepostory {
     private configService: ConfigService,
   ) {}
 
-  private async _generateTokens(
-    email: string,
-    password: string,
-  ): Promise<AuthTokens> {
+  private async validateAndGetUser(email: string, password: string) {
     const user = await this.userFindOneInternalService.execute({ email });
-    const jwtConfig = this.configService.get<JwtConfig>('jwt');
 
     const userPassword = user
       ? (
@@ -43,12 +40,17 @@ export class AuthJwtSingInRepostory {
     if (!passwordCompare) {
       throw new UnauthorizedException();
     }
+    return user.toPrimitive();
+  }
 
-    const role = await this.userRolesFindOneRepository.execute(user.values.id);
+  private async _generateTokens(user: UserPrimitive): Promise<AuthTokens> {
+    const jwtConfig = this.configService.get<JwtConfig>('jwt');
+
+    const role = await this.userRolesFindOneRepository.execute(user.id);
 
     const payload = {
-      sub: user.values.id,
-      username: user.values.name,
+      sub: user.id,
+      username: user.name,
       scopes: PermissionService.getModulesActionsByRoles([
         Roles[role.toPrimitive().name as keyof typeof Roles],
       ]),
@@ -71,11 +73,9 @@ export class AuthJwtSingInRepostory {
     response: FastifyReply,
     email: string,
     password: string,
-  ): Promise<void> {
-    const { accessToken, refreshToken } = await this._generateTokens(
-      email,
-      password,
-    );
+  ): Promise<{ user: UserPrimitive }> {
+    const user = await this.validateAndGetUser(email, password);
+    const { accessToken, refreshToken } = await this._generateTokens(user);
     const jwtConfig = this.configService.get<JwtConfig>('jwt');
     const config = this.configService.get<AppConfig>('app');
 
@@ -94,9 +94,21 @@ export class AuthJwtSingInRepostory {
       sameSite: 'strict',
       path: '/',
     });
+
+    return { user };
   }
 
-  async signInMobile(email: string, password: string): Promise<AuthTokens> {
-    return this._generateTokens(email, password);
+  async signInMobile(
+    email: string,
+    password: string,
+  ): Promise<AuthTokens & { user: UserPrimitive }> {
+    const user = await this.validateAndGetUser(email, password);
+
+    const tokens = await this._generateTokens(user);
+
+    return {
+      ...tokens,
+      user,
+    };
   }
 }
