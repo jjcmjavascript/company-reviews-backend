@@ -11,6 +11,7 @@ import { ReviewerTypeModule } from '@modules/reviewer-type/reviewer-type.module'
 import { ReportedCompanyModule } from '@modules/reported-company/reported-company.module';
 import { ReviewerTypeCategoryModule } from '@modules/reviewer-type-category/reviewer-type-category.module';
 import { CompanyCategoryScoreModule } from '@modules/company-category-score/company-category-score.module';
+import { ReviewDeleteService } from './services/review-delete.service';
 
 @Module({
   imports: [
@@ -27,8 +28,9 @@ import { CompanyCategoryScoreModule } from '@modules/company-category-score/comp
     ReviewCreateRepository,
     ReviewFindAllService,
     ReviewCreateService,
+    ReviewDeleteService,
   ],
   controllers: [ReviewController],
-  exports: [ReviewFindAllRepository, ReviewFindAllService],
+  exports: [ReviewFindAllRepository, ReviewFindAllService, ReviewDeleteService],
 })
 export class ReviewModule {}

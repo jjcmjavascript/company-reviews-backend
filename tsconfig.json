@@ -17,6 +17,7 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "esModuleInterop": true,
     "paths": {
       "@shared/*": ["src/shared/*"],
       "@modules/*": ["src/modules/*"],
@@ -25,7 +26,7 @@
       "@decorators/*": ["src/shared/decorators/*"],
       "@contracts/*": ["src/shared/contracts/*"],
       "@helpers/*": ["src/shared/helpers/*"],
-      "@config/*": ["src/config/*"],
+      "@config/*": ["src/config/*"]
     }
   }
 }

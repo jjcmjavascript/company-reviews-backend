@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -13,12 +14,14 @@ import { ReviewFindDto } from './dto/review-find.dto';
 import { ReviewFindAllService } from './services/review-find-all.service';
 import { CurrentUser, JwtUser } from '@shared/decorators/user.decorator';
 import { Loged } from '@shared/decorators/loged.decorator';
+import { ReviewDeleteService } from './services/review-delete.service';
 
 @Controller('reviews/company')
 export class ReviewController {
   constructor(
     private readonly findAllService: ReviewFindAllService,
     private readonly createService: ReviewCreateService,
+    private readonly deleteService: ReviewDeleteService,
   ) {}
 
   @Get(':reportedCompanyId')
@@ -36,5 +39,14 @@ export class ReviewController {
     @CurrentUser() currentUser: JwtUser,
   ) {
     return this.createService.execute(review, currentUser);
+  }
+
+  @Delete(':id')
+  @Loged()
+  async delete(
+    @Param('id', ParseIntPipe) id: number,
+    @CurrentUser() currentUser: JwtUser,
+  ) {
+    return this.deleteService.execute(id, currentUser);
   }
 }
