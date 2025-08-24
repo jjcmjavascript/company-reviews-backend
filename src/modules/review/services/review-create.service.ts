@@ -14,17 +14,19 @@ import { ReportedCompanyFindService } from '@modules/reported-company/service/re
 import { JwtUser } from '@shared/decorators/user.decorator';
 import { CompanyCategoryScoreCreateService } from '@modules/company-category-score/services/company-category-score-create.service';
 import { ReviewVerificationStatus } from '@shared/enums/commons.enum';
+import { ReviewDetailsCreateService } from '@modules/review-details/services/review-details-create.service';
 
 @Injectable()
 export class ReviewCreateService {
   constructor(
     private readonly reviewCreateRepository: ReviewCreateRepository,
+    private readonly companyCategoryScoreCreateService: CompanyCategoryScoreCreateService,
+    private readonly reviewDetailsCreateRepository: ReviewDetailsCreateService,
     private readonly reviewFindService: ReviewFindAllRepository,
     private readonly categoriesFindAllService: CategoryFindAllService,
     private readonly reviewerTypeFindByIdService: ReviewerTypeFindByIdService,
     private readonly reviewerTypeCategoryFindAllService: ReviewerTypeCategoryFindAllService,
     private readonly reportedCompanyFindService: ReportedCompanyFindService,
-    private readonly companyCategoryScoreCreateService: CompanyCategoryScoreCreateService,
   ) {}
 
   async execute(
@@ -54,6 +56,12 @@ export class ReviewCreateService {
       },
       reviewDetails: params.reviewDetails,
     });
+
+    await this.reviewDetailsCreateRepository.execute(
+      result.id,
+      params.reviewDetails,
+    );
+
     return Review.toJsonResponse(result);
   }
 
@@ -75,10 +83,15 @@ export class ReviewCreateService {
       (id) => !categoriesInDb.some((category) => category.id === id),
     );
 
+    const hasInvalidCategories = invalidCategoryIds.length > 0;
+    const hasNoReviewerTypeCategories = reviewerTypeCategories.length === 0;
+    const hasDifferentCategoryCount =
+      reviewerTypeCategories.length !== categoryIds.length;
+
     if (
-      invalidCategoryIds.length > 0 ||
-      reviewerTypeCategories.length === 0 ||
-      reviewerTypeCategories.length !== categoryIds.length
+      hasInvalidCategories ||
+      hasNoReviewerTypeCategories ||
+      hasDifferentCategoryCount
     ) {
       throw new BadRequestException(`Invalid categories`);
     }

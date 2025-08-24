@@ -12,6 +12,7 @@ import { ReportedCompanyModule } from '@modules/reported-company/reported-compan
 import { ReviewerTypeCategoryModule } from '@modules/reviewer-type-category/reviewer-type-category.module';
 import { CompanyCategoryScoreModule } from '@modules/company-category-score/company-category-score.module';
 import { ReviewDeleteService } from './services/review-delete.service';
+import { ReviewDetailsModule } from '@modules/review-details/review-details.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ReviewDeleteService } from './services/review-delete.service';
     ReviewerTypeCategoryModule,
     ReportedCompanyModule,
     CompanyCategoryScoreModule,
+    ReviewDetailsModule,
   ],
   providers: [
     ReviewDetailCreateRepository,

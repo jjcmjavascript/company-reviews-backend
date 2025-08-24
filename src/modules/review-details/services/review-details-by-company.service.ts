@@ -4,24 +4,23 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ReviewDetailsFindAllRepository } from '../repositories/review-details-find-all.repository';
-import { ReviewFindAllService } from '@modules/review/services/review-find-all.service';
 import { ReviewDetailsByCompany } from '../reviews-details.interfaces';
 import { ReviewDetail } from '@shared/entities/review-details.entity';
+import { PrismaService } from '@shared/services/database/prisma/prisma.service';
 
 @Injectable()
 export class ReviewDetailsByCompanyService {
   private readonly logger = new Logger(ReviewDetailsByCompanyService.name);
   constructor(
-    private readonly reviewFindAllService: ReviewFindAllService,
+    private readonly reviewFindAllService: PrismaService,
     private readonly reviewDetailsFindAllRepository: ReviewDetailsFindAllRepository,
   ) {}
 
   async execute({ reportedCompanyId }: ReviewDetailsByCompany) {
     try {
-      const reviews = await this.reviewFindAllService.execute(
-        reportedCompanyId,
-        {},
-      );
+      const reviews = await this.reviewFindAllService.review.findMany({
+        where: { reportedCompanyId },
+      });
 
       const reviewIds = reviews.map((review) => review.id);
 

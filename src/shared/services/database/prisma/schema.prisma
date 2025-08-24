@@ -23,6 +23,7 @@ model User {
   comments        ReportedCompanyComment[]
   reviews         Review[]
   reviewReactions ReviewReaction[]
+  UserDailyReview UserDailyReview[]
 }
 
 model Password {
@@ -83,6 +84,7 @@ model Review {
   user               User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
   reportedCompany    ReportedCompany           @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
   ReviewReaction     ReviewReaction[]
+  UserDailyReview    UserDailyReview[]
 }
 
 model ReviewerType {
@@ -173,6 +175,16 @@ model CompanyCategoryScore {
 
   @@unique([reportedCompanyId, categoryId])
   @@index([reportedCompanyId, categoryId])
+}
+
+model UserDailyReview {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  reviewId  Int
+  createdAt DateTime @default(now()) @db.Timestamp()
+  updatedAt DateTime @updatedAt @db.Timestamp()
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 }
 
 enum ReactionType {
