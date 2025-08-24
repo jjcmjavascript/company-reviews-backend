@@ -18,3 +18,12 @@ RUN npm install
 COPY . .
 
 EXPOSE $PORT
+
+# Copia el script de entrada y da permisos de ejecución
+COPY dev-entry.sh ./
+
+RUN chmod +x ./dev-entry.sh
+
+# Usa el script como comando principal
+CMD ["./dev-entry.sh"]
+

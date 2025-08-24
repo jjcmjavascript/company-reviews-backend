@@ -22,7 +22,7 @@ services:
     container_name: backend-reportedcompany
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: DockerfileDev
     env_file:
       - .env
     environment:
