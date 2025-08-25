@@ -25,4 +25,4 @@ echo "🚀 dev-entry.sh: Starting the app 🚀"
 
 echo "############ Welcome: dev-entry.sh: Done ############"
 
-exec npm start
+npm start
