@@ -5,7 +5,6 @@ import { loadEnvFile } from 'node:process';
 import { Roles } from '../../permission/types/roles.enum';
 import { ReviewVerificationStatus } from '../../../enums/commons.enum';
 
-console.log('----------->', process.env.NODE_ENV);
 if (process.env.NODE_ENV !== 'production') {
   loadEnvFile('.env');
 }
