@@ -20,10 +20,10 @@ COPY . .
 EXPOSE $PORT
 
 # Copia el script de entrada y da permisos de ejecución
-COPY dev-entry.sh ./
+COPY entry.sh ./
 
-RUN chmod +x ./dev-entry.sh
+RUN chmod +x ./entry.sh
 
 # Usa el script como comando principal
-CMD ["./dev-entry.sh"]
+CMD ["./entry.sh"]
 
