@@ -1,16 +1,13 @@
-import {
-  CanActivate,
-  ExecutionContext,
-  Injectable,
-  Logger,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Roles } from '@shared/services/permission/types/roles.enum';
 import { UserRolesFindOneRepository } from './repositories/user-roles-find-one.repository';
+import { DefaultLogger } from '@shared/services/logger.service';
 
 @Injectable()
 export class UserRolesGuard implements CanActivate {
-  private readonly logger: Logger = new Logger(UserRolesGuard.name);
+  private readonly logger = new DefaultLogger(UserRolesGuard.name);
+
   constructor(
     private readonly reflector: Reflector,
     private readonly useRoleFindOneRepository: UserRolesFindOneRepository,
@@ -36,8 +33,8 @@ export class UserRolesGuard implements CanActivate {
         return false;
       }
       return true;
-    } catch (e: unknown) {
-      this.logger.error(`[UserRolesGuard] ${(e as Error).message}`);
+    } catch (error: unknown) {
+      this.logger.fromError(error);
 
       return false;
     }

@@ -5,14 +5,14 @@ import {
   ExceptionFilter,
   HttpException,
   HttpStatus,
-  Logger,
 } from '@nestjs/common';
 import { ThrottlerException } from '@nestjs/throttler';
 import { FastifyReply, FastifyRequest } from 'fastify';
+import { DefaultLogger } from './logger.service';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  private readonly logger = new Logger(AllExceptionsFilter.name);
+  private readonly logger = new DefaultLogger(AllExceptionsFilter.name);
 
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
@@ -31,10 +31,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     const ignoredRoutes = ['/is_logged'];
 
-    this.logger.error(
-      `exception.filter.service: (${status}) ${req.method} ${req.url} - ${message}`,
-      !ignoredRoutes.includes(req?.url) && (exception as Error)?.stack,
-    );
+    this.logger.error({
+      message: `exception.filter.service: (${status}) ${req.method} ${req.url} - ${message}`,
+      stack: !ignoredRoutes.includes(req?.url) && (exception as Error)?.stack,
+    });
 
     if (exception instanceof ThrottlerException) {
       return res.status(HttpStatus.TOO_MANY_REQUESTS).send({
@@ -46,7 +46,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
       ? (exception as HttpException).getResponse()
       : { statusCode: status, message };
 
-    // Fastify
     res.status(status).send(payload);
   }
 }

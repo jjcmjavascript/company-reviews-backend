@@ -1,14 +1,12 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CategoryFindAllRepository } from '../repositories/category-find-all.repository';
 import { Category } from '@shared/entities/category.entity';
+import { DefaultLogger } from '@shared/services/logger.service';
 
 @Injectable()
 export class CategoryFindAllService {
-  private readonly logger = new Logger(CategoryFindAllService.name);
+  private readonly logger = new DefaultLogger(CategoryFindAllService.name);
+
   constructor(private readonly categoryRepository: CategoryFindAllRepository) {}
 
   async execute() {

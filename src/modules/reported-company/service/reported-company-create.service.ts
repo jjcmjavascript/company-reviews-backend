@@ -1,17 +1,17 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ReportedCompanyCreateRepository } from '../repositories/reported-company-create.repository';
 import {
   ReportedCompany,
   ReportedCompanyPrimitive,
 } from '@shared/entities/reported-company.entity';
+import { DefaultLogger } from '@shared/services/logger.service';
 
 @Injectable()
 export class ReportedCompanyCreateService {
-  private readonly logger = new Logger(ReportedCompanyCreateService.name);
+  private readonly logger = new DefaultLogger(
+    ReportedCompanyCreateService.name,
+  );
+
   constructor(
     private readonly reportedCompanyCreateService: ReportedCompanyCreateRepository,
   ) {}
@@ -24,10 +24,7 @@ export class ReportedCompanyCreateService {
 
       return ReportedCompany.create(result).values;
     } catch (error: unknown) {
-      this.logger.error({
-        message: 'Error on create reported company',
-        error: (error as Error).message,
-      });
+      this.logger.fromError(error);
 
       throw new InternalServerErrorException(
         'Error on create reported company',
