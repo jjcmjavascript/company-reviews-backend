@@ -10,8 +10,8 @@ import {
 import { AuthJwtSingInRepostory } from './repositories/auth-jwt-sigin.repository';
 import { RegisterDto, SignInDto } from './auth.dto';
 import { FastifyReply } from 'fastify';
-import { Loged } from '@shared/decorators/loged.decorator';
 import { AuthJwtRegisterMobileRepository } from './repositories/auth-jwt-register-mobile.repository';
+import { CurrentUserOrNull, JwtUser } from '@shared/decorators/user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -54,9 +54,8 @@ export class AuthController {
     );
   }
 
-  @Loged()
   @Get('is_logged')
-  async isLogged() {
-    return true;
+  async isLogged(@CurrentUserOrNull() user: JwtUser | null) {
+    return { isLogged: !!user };
   }
 }

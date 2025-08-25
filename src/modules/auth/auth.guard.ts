@@ -41,7 +41,6 @@ export class AuthGuard implements CanActivate {
         return true;
       }
 
-      console.log('TOKEN:', token, hasTobeLoged);
       const payload = await this.jwtService.verifyAsync(token, {
         secret: config.jwtSecret,
       });
@@ -49,7 +48,6 @@ export class AuthGuard implements CanActivate {
       request['user'] = payload;
     } catch {
       const result = await this.tryRefreshToken(request, response);
-
       if (result) {
         return true;
       }

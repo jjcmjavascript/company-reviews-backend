@@ -53,8 +53,8 @@ providers.push({
     ThrottlerModule.forRoot({
       throttlers: [
         {
-          ttl: 60000,
-          limit: 20,
+          ttl: 120000,
+          limit: 200,
           blockDuration: 180000,
         },
       ],
