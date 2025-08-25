@@ -46,6 +46,7 @@ export class ReviewCreateService {
 
     const result = await this.reviewCreateRepository.execute({
       ...params,
+      reviewerTypeId: 2,
       userId: currentUser.userId,
     });
 
