@@ -35,9 +35,9 @@ export class ReviewCreateService {
   ): Promise<Partial<ReviewPrimitive>> {
     await this.validateCompany(params.reportedCompanyId);
 
-    await this.validateReviewerType(params.reviewerTypeId);
+    await this.validateReviewerType(2);
 
-    await this.validateCategories(params.reviewDetails, params.reviewerTypeId);
+    await this.validateCategories(params.reviewDetails, 2);
 
     await this.validatePreviousReview(
       currentUser.userId,
