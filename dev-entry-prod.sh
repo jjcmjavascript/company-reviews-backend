@@ -3,8 +3,10 @@ set -e
 
 echo "dev-entry.sh: Running migrations and starting the app"
 
+echo ${NODE_ENV}
+
 echo "Esperando a que la base de datos esté lista... 💤"
-while ! pg_isready -h reportedcompanydb -p ${DATABASE_PORT} -U ${DATABASE_USER}; do
+while ! pg_isready -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USER}; do
   echo "Esperando a que la base de datos esté lista...💤"
   sleep 2
 done
