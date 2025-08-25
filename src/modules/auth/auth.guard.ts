@@ -36,11 +36,12 @@ export class AuthGuard implements CanActivate {
 
     try {
       if (!token && hasTobeLoged) {
-        throw new UnauthorizedException('Invalid session');
+        throw new UnauthorizedException('A valid token is required');
       } else if (!token && !hasTobeLoged) {
         return true;
       }
 
+      console.log('TOKEN:', token, hasTobeLoged);
       const payload = await this.jwtService.verifyAsync(token, {
         secret: config.jwtSecret,
       });
@@ -52,6 +53,9 @@ export class AuthGuard implements CanActivate {
       if (result) {
         return true;
       }
+
+      response.clearCookie('access_token');
+      response.clearCookie('refresh_token');
 
       throw new UnauthorizedException('Invalid session');
     }
