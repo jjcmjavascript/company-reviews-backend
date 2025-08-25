@@ -6,23 +6,23 @@ echo "dev-entry.sh: Running migrations and starting the app"
 echo ${NODE_ENV}
 
 echo "Esperando a que la base de datos esté lista... 💤"
-while ! pg_isready -h ${DATABASE_HOST} -p ${DATABASE_PORT} -U ${DATABASE_USER}; do
+while ! pg_isready -d ${DATABASE_URL}; do
   echo "Esperando a que la base de datos esté lista...💤"
   sleep 2
 done
 
 
-echo "dev-entry.sh: Running migrations ✅"
+echo "entry.sh: Running migrations ✅"
 npx prisma migrate deploy
 
-echo "dev-entry.sh: Generating Prisma Client 📈📈"
+echo "entry.sh: Generating Prisma Client 📈📈"
 npx prisma generate
 
-echo "dev-entry.sh: Seeding the database 🌵🌵"
+echo "entry.sh: Seeding the database 🌵🌵"
 npm run seed
 
-echo "🚀 dev-entry.sh: Starting the app 🚀"
+echo "🚀 entry.sh: Starting the app 🚀"
 
-echo "############ Welcome: dev-entry.sh: Done ############"
+echo "############ Welcome: entry.sh: Done ############"
 
-npm start
+exec npm start

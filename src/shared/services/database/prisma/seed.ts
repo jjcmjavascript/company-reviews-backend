@@ -5,7 +5,9 @@ import { loadEnvFile } from 'node:process';
 import { Roles } from '../../permission/types/roles.enum';
 import { ReviewVerificationStatus } from '../../../enums/commons.enum';
 
-loadEnvFile('.env');
+if (process.env.NODE_ENV !== 'production') {
+  loadEnvFile('.env');
+}
 
 const prisma = new PrismaClient();
 
