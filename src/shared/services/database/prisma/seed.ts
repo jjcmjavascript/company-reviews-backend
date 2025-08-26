@@ -72,7 +72,7 @@ const getReview = (
     userId,
     reviewerTypeId,
     reportedCompanyId: company.id,
-    verificationStatus: ReviewVerificationStatus.NOT_VERIFIED,
+    verificationStatus: ReviewVerificationStatus.APPROVED,
   }));
 };
 
