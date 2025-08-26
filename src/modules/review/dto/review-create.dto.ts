@@ -5,7 +5,6 @@ import {
   IsArray,
   IsInt,
   IsNotEmpty,
-  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -18,9 +17,8 @@ export class ReviewCreateDto {
   @IsInt({ message: 'Company ID must be an integer' })
   reportedCompanyId: number;
 
-  // @IsNotEmpty({ message: 'Reviewer type is required' })
-  // @IsInt({ message: 'Reviewer type ID must be an integer' })
-  @IsOptional()
+  @IsNotEmpty({ message: 'Reviewer type is required' })
+  @IsInt({ message: 'Reviewer type ID must be an integer' })
   reviewerTypeId: number;
 
   @IsNotEmpty({ message: 'Description is required' })
