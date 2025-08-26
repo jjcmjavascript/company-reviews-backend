@@ -3,36 +3,37 @@ import {
   NestInterceptor,
   ExecutionContext,
   CallHandler,
-  Logger,
 } from '@nestjs/common';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { DefaultLogger } from '@shared/services/logger.service';
+
+import { FastifyRequest } from 'fastify';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
-  private readonly logger = new Logger(LoggingInterceptor.name);
+  private readonly logger = new DefaultLogger(LoggingInterceptor.name);
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-    const request = context.switchToHttp().getRequest();
+    const request: FastifyRequest = context.switchToHttp().getRequest();
     const now = Date.now();
 
-    this.logger.log(` 🚀 ${request.method} ${request.url}`);
+    this.logger.init({
+      message: ` 🚀 ${request.method} ${request.url}`,
+      objects: {
+        headers: request.headers,
+        params: request.params,
+        query: request.query,
+        body: request.body,
+      },
+    });
 
     return next.handle().pipe(
       tap((responseData) => {
         const time = Date.now() - now;
-        this.logger.log({
+        this.logger.end({
           message: ` ✅ ${request.method} ${request.url} | ⏱️ ${time}ms`,
-          data: responseData,
+          objects: responseData,
         });
-      }),
-      catchError((error) => {
-        const time = Date.now() - now;
-
-        this.logger.error({
-          error: ` ❌ ${request.method} ${request.url} | ❗ Error: ${error.message} | ⏱️ ${time}ms`,
-          stack: error.stack,
-        });
-        return throwError(() => error);
       }),
     );
   }

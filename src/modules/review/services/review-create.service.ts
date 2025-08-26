@@ -15,9 +15,12 @@ import { JwtUser } from '@shared/decorators/user.decorator';
 import { CompanyCategoryScoreCreateService } from '@modules/company-category-score/services/company-category-score-create.service';
 import { ReviewVerificationStatus } from '@shared/enums/commons.enum';
 import { ReviewDetailsCreateService } from '@modules/review-details/services/review-details-create.service';
+import { DefaultLogger } from '@shared/services/logger.service';
 
 @Injectable()
 export class ReviewCreateService {
+  private readonly logger = new DefaultLogger(ReviewCreateService.name);
+  
   constructor(
     private readonly reviewCreateRepository: ReviewCreateRepository,
     private readonly companyCategoryScoreCreateService: CompanyCategoryScoreCreateService,
@@ -33,6 +36,7 @@ export class ReviewCreateService {
     params: ReviewCreateDto,
     currentUser: JwtUser,
   ): Promise<Partial<ReviewPrimitive>> {
+    this.
     await this.validateCompany(params.reportedCompanyId);
 
     await this.validateReviewerType(params.reviewerTypeId);
