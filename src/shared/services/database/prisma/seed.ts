@@ -114,6 +114,39 @@ const getCompaniesScore = (
   return companyCategoryScores;
 };
 
+const getCompanyCategoryScore = (
+  reportedCompanies: { id: number }[],
+  categories: { id: number }[],
+) => {
+  const companyCategoryScores: {
+    reportedCompanyId: number;
+    categoryId: number;
+    verifiedScore: number;
+    unverifiedScore: number;
+    verifiedCount: number;
+    unverifiedCount: number;
+    verifiedSum: number;
+    unverifiedSum: number;
+  }[] = [];
+
+  reportedCompanies.forEach((company) => {
+    categories.forEach((category) => {
+      companyCategoryScores.push({
+        reportedCompanyId: company.id,
+        categoryId: category.id,
+        verifiedScore: 5,
+        unverifiedScore: 5,
+        verifiedCount: 1,
+        unverifiedCount: 1,
+        verifiedSum: 5,
+        unverifiedSum: 5,
+      });
+    });
+  });
+
+  return companyCategoryScores;
+};
+
 async function main() {
   const checkIfFileExists = fs.existsSync('seed.json');
   const userCount = await prisma.user.count();
@@ -158,6 +191,11 @@ async function main() {
 
     const reviewRaws = getReview(reportedCompanies, user.id, system.id);
 
+    const companyCategoryScoreRaws = getCompanyCategoryScore(
+      reportedCompanies,
+      categories,
+    );
+
     await Promise.all([
       tx.password.create({
         data: {
@@ -175,6 +213,11 @@ async function main() {
 
       tx.reviewerTypeCategory.createMany({
         data: reviewerTypesCategories,
+        skipDuplicates: true,
+      }),
+
+      tx.companyCategoryScore.createMany({
+        data: companyCategoryScoreRaws,
         skipDuplicates: true,
       }),
     ]);
