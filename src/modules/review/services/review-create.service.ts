@@ -64,10 +64,18 @@ export class ReviewCreateService {
       reviewDetails: params.reviewDetails,
     });
 
+    this.logger.process({
+      message: `Creating companyCategoryScore for company ${params.reportedCompanyId}`,
+    });
+
     await this.reviewDetailsCreateRepository.execute(
       result.id,
       params.reviewDetails,
     );
+
+    this.logger.process({
+      message: `Creating reviewDetails for company ${params.reportedCompanyId}`,
+    });
 
     return Review.toJsonResponse(result);
   }
