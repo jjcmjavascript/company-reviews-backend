@@ -20,7 +20,7 @@ import { DefaultLogger } from '@shared/services/logger.service';
 @Injectable()
 export class ReviewCreateService {
   private readonly logger = new DefaultLogger(ReviewCreateService.name);
-  
+
   constructor(
     private readonly reviewCreateRepository: ReviewCreateRepository,
     private readonly companyCategoryScoreCreateService: CompanyCategoryScoreCreateService,
@@ -36,7 +36,10 @@ export class ReviewCreateService {
     params: ReviewCreateDto,
     currentUser: JwtUser,
   ): Promise<Partial<ReviewPrimitive>> {
-    this.
+    this.logger.init({
+      message: `Creating review for company ${params.reportedCompanyId}`,
+    });
+
     await this.validateCompany(params.reportedCompanyId);
 
     await this.validateReviewerType(params.reviewerTypeId);

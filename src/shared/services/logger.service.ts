@@ -44,6 +44,13 @@ export class DefaultLogger {
     });
   }
 
+  process(object: { message: string; objects?: Record<string, unknown> }) {
+    this.logger.info({
+      ...object,
+      message: `🔥🔥🔥 (PROCESS) ${object.message}`,
+    });
+  }
+
   end(object: { message: string; objects?: Record<string, unknown> }) {
     this.logger.info({
       ...object,
