@@ -26,4 +26,8 @@ export const config = (): Config => ({
   sentry: {
     dsn: process.env.SENTRY_DSN,
   },
+  userLimits: {
+    messageLimit: parseInt(process.env.MESSAGE_LIMIT) || 2,
+    reviewLimit: parseInt(process.env.REVIEW_LIMIT) || 2,
+  },
 });

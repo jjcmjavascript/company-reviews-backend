@@ -1,3 +1,11 @@
+export interface Config {
+  app: AppConfig;
+  cors: CorsConfig;
+  jwt: JwtConfig;
+  sentry: SentryConfig;
+  userLimits: UserLimits;
+}
+
 export interface AppConfig {
   port: number;
   isProduction: boolean;
@@ -21,9 +29,7 @@ export interface SentryConfig {
   dsn: string | undefined;
 }
 
-export interface Config {
-  app: AppConfig;
-  cors: CorsConfig;
-  jwt: JwtConfig;
-  sentry: SentryConfig;
+export interface UserLimits {
+  messageLimit: number;
+  reviewLimit: number;
 }

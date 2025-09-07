@@ -9,21 +9,22 @@ datasource db {
 }
 
 model User {
-  id              Int                      @id @default(autoincrement())
-  uuid            String?                  @unique @db.VarChar()
-  email           String                   @unique @db.VarChar()
-  name            String?                  @db.VarChar()
-  nickName        String?                  @db.VarChar()
-  lastname        String?                  @db.VarChar()
-  tax             String?                  @db.VarChar()
-  deletedAt       DateTime?                @db.Timestamp()
-  createdAt       DateTime                 @default(now()) @db.Timestamp()
-  password        Password?
-  roles           UserRole[]
-  comments        ReportedCompanyComment[]
-  reviews         Review[]
-  reviewReactions ReviewReaction[]
-  UserDailyReview UserDailyReview[]
+  id                  Int                      @id @default(autoincrement())
+  uuid                String?                  @unique @db.VarChar()
+  email               String                   @unique @db.VarChar()
+  name                String?                  @db.VarChar()
+  nickName            String?                  @db.VarChar()
+  lastname            String?                  @db.VarChar()
+  tax                 String?                  @db.VarChar()
+  deletedAt           DateTime?                @db.Timestamp()
+  createdAt           DateTime                 @default(now()) @db.Timestamp()
+  password            Password?
+  roles               UserRole[]
+  comments            ReportedCompanyComment[]
+  reviews             Review[]
+  reviewReactions     ReviewReaction[]
+  UserDailyReview     UserDailyReview[]
+  ReportedCompanyChat ReportedCompanyChat[]
 }
 
 model Password {
@@ -57,6 +58,7 @@ model ReportedCompany {
   companySummary       CompanySummary?
   companySearch        CompanySearch?
   companyCategoryScore CompanyCategoryScore[]
+  ReportedCompanyChat  ReportedCompanyChat[]
 }
 
 model ReportedCompanyComment {
@@ -185,6 +187,17 @@ model UserDailyReview {
   updatedAt DateTime @updatedAt @db.Timestamp()
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+}
+
+model ReportedCompanyChat {
+  id                Int             @id @default(autoincrement())
+  reportedCompanyId Int
+  userId            Int
+  message           String          @db.Text()
+  createdAt         DateTime        @default(now()) @db.Timestamp()
+  deletedAt         DateTime?       @db.Timestamp()
+  reportedCompany   ReportedCompany @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum ReactionType {

@@ -1,6 +1,7 @@
 // all-exceptions.filter.ts
 import {
   ArgumentsHost,
+  BadRequestException,
   Catch,
   ExceptionFilter,
   HttpException,
@@ -25,26 +26,38 @@ export class AllExceptionsFilter implements ExceptionFilter {
       ? exception.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    const message = isHttp
+    let message = isHttp
       ? (exception as HttpException).message
       : 'Internal server error';
 
     const ignoredRoutes = ['/is_logged'];
 
-    this.logger.error({
-      message: `exception.filter.service: (${status}) ${req.method} ${req.url} - ${message}`,
-      stack: !ignoredRoutes.includes(req?.url) && (exception as Error)?.stack,
-    });
-
+    // Manejo específico para Throttler (rate limiting)
     if (exception instanceof ThrottlerException) {
       return res.status(HttpStatus.TOO_MANY_REQUESTS).send({
         statusCode: HttpStatus.TOO_MANY_REQUESTS,
         message: 'Too many requests',
       });
     }
+
+    // Esto es para manejar los errores arrojados por class-validator
+    if (exception instanceof BadRequestException) {
+      const res = exception.getResponse();
+      if (typeof res === 'object' && res['message']) {
+        if (Array.isArray(res['message'])) {
+          message = `${message}: ${res['message'].join(', ')}`;
+        }
+      }
+    }
+
     const payload = isHttp
       ? (exception as HttpException).getResponse()
       : { statusCode: status, message };
+
+    this.logger.error({
+      message: `exception.filter.service: (${status}) ${req.method} ${req.url} - ${message}`,
+      stack: !ignoredRoutes.includes(req?.url) && (exception as Error)?.stack,
+    });
 
     res.status(status).send(payload);
   }
