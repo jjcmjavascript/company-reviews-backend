@@ -5,14 +5,14 @@ import { DefaultLogger } from '@shared/services/logger.service';
 import { ReportedCompanyChatEntity } from '@shared/entities/reportedCompanyChat.entity';
 
 @Injectable()
-export class ReportedCompanyChatService {
-  private logger = new DefaultLogger(ReportedCompanyChatService.name);
+export class ReportedCompanyChatCreateService {
+  private logger = new DefaultLogger(ReportedCompanyChatCreateService.name);
 
   constructor(
     private readonly reportedCompanyChatCreateRepository: ReportedCompanyChatCreateRepository,
   ) {}
 
-  async create(
+  async execute(
     createReportedCompanyChatDto: CreateReportedCompanyChatDto,
     userId: number,
   ) {
@@ -45,23 +45,4 @@ export class ReportedCompanyChatService {
 
     return ReportedCompanyChatEntity.toJsonResponse(result);
   }
-
-  // async findAllForCompany(reportedCompanyId: number) {
-  //   return this.prisma.reportedCompanyChat.findMany({
-  //     where: {
-  //       reportedCompanyId,
-  //     },
-  //     include: {
-  //       user: {
-  //         select: {
-  //           id: true,
-  //           name: true,
-  //         },
-  //       },
-  //     },
-  //     orderBy: {
-  //       createdAt: 'asc',
-  //     },
-  //   });
-  // }
 }

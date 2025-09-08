@@ -4,36 +4,40 @@ import {
   Post,
   Body,
   Param,
-  UseGuards,
-  Req,
+  ParseIntPipe,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
-import { ReportedCompanyChatService } from './reported-company-chat.service';
 import { CreateReportedCompanyChatDto } from './dto/create-reported-company-chat.dto';
-import { AuthGuard } from '@nestjs/passport'; // Assuming JWT auth
+import { ReportedCompanyChatCreateService } from './services/reported-company-chat-create.service';
+import { CurrentUser, JwtUser } from '@shared/decorators/user.decorator';
+import { Loged } from '@shared/decorators/loged.decorator';
+import { ReportedCompanyChatFindAllService } from './services/reported-company-find-all.service';
 
 @Controller('reported-company-chats')
 export class ReportedCompanyChatController {
   constructor(
-    private readonly reportedCompanyChatService: ReportedCompanyChatService,
+    private readonly createService: ReportedCompanyChatCreateService,
+    private readonly findAllService: ReportedCompanyChatFindAllService,
   ) {}
 
-  @UseGuards(AuthGuard('jwt')) // Protect route
   @Post()
+  @Loged()
+  @HttpCode(HttpStatus.CREATED)
   create(
     @Body() createReportedCompanyChatDto: CreateReportedCompanyChatDto,
-    @Req() req,
+    @CurrentUser() user: JwtUser,
   ) {
-    const userId = req.user.id; // Assuming user id is in request
-    return this.reportedCompanyChatService.create(
+    return this.createService.execute(
       createReportedCompanyChatDto,
-      userId,
+      user.userId,
     );
   }
 
   @Get('company/:reportedCompanyId')
-  findAllForCompany(@Param('reportedCompanyId') reportedCompanyId: string) {
-    return this.reportedCompanyChatService.findAllForCompany(
-      +reportedCompanyId,
-    );
+  findAllForCompany(
+    @Param('reportedCompanyId', ParseIntPipe) reportedCompanyId: number,
+  ) {
+    return this.findAllService.execute(reportedCompanyId);
   }
 }
