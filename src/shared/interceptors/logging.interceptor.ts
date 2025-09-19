@@ -16,9 +16,12 @@ export class LoggingInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const request: FastifyRequest = context.switchToHttp().getRequest();
     const now = Date.now();
+    const uuid = Math.random().toString(36).substring(2, 15);
+
+    request.headers['x-request-id'] = uuid;
 
     this.logger.init({
-      message: ` 🚀 ${request.method} ${request.url}`,
+      message: ` 🚀 [ID- ${uuid}] ${request.method} ${request.url}`,
       objects: {
         headers: request.headers,
         params: request.params,
@@ -31,7 +34,7 @@ export class LoggingInterceptor implements NestInterceptor {
       tap((responseData) => {
         const time = Date.now() - now;
         this.logger.end({
-          message: ` ✅ ${request.method} ${request.url} | ⏱️ ${time}ms`,
+          message: ` ✅ [ID- ${uuid}] ${request.method} ${request.url} | ⏱️ ${time}ms`,
           objects: responseData,
         });
       }),

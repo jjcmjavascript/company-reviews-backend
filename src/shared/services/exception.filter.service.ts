@@ -17,9 +17,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
-    // Soporta Express o Fastify:
     const req = ctx.getRequest<FastifyRequest>();
     const res = ctx.getResponse<FastifyReply>();
+
+    const uuid = req.headers['x-request-id'] || '';
 
     const isHttp = exception instanceof HttpException;
     const status = isHttp
@@ -55,7 +56,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       : { statusCode: status, message };
 
     this.logger.error({
-      message: `exception.filter.service: (${status}) ${req.method} ${req.url} - ${message}`,
+      message: `[ID- ${uuid}] exception.filter.service: (${status}) ${req.method} ${req.url} - ${message}`,
       stack: !ignoredRoutes.includes(req?.url) && (exception as Error)?.stack,
     });
 

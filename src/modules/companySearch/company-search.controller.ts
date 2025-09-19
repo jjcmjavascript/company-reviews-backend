@@ -4,6 +4,7 @@ import { CompanySearchCreateService } from './services/company-search-create.ser
 import { CurrentUser, JwtUser } from '@shared/decorators/user.decorator';
 import { CompanySearchFindOneRepository } from './repositories/company-search-find-one.repository';
 import { CompanySearchPrimitive } from '@shared/entities/company-search.entity';
+import { Loged } from '@shared/decorators/loged.decorator';
 
 @Controller('company-search')
 export class CompanySearchController {
@@ -13,6 +14,7 @@ export class CompanySearchController {
   ) {}
 
   @Post()
+  @Loged()
   @HttpCode(HttpStatus.CREATED)
   async create(
     @Body() searchDto: CompanySearchDto,
