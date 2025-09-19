@@ -24,6 +24,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtConfig } from '@config/config.interface';
 import { PrismaModule } from '@modules/prisma/prisma.module';
 import { ReportedCompanyChatModule } from '@modules/chat/reported-company-chat.module';
+import { CompanySearchModule } from '@modules/companySearch/company-search.module';
 
 const providers = [];
 
@@ -92,6 +93,7 @@ providers.push({
     ReviewerTypeModule,
     ReviewerTypeCategoryModule,
     ReportedCompanyChatModule,
+    CompanySearchModule,
   ],
   controllers: [],
   providers,

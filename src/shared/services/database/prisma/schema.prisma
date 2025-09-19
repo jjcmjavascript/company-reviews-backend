@@ -25,6 +25,7 @@ model User {
   reviewReactions     ReviewReaction[]
   UserDailyReview     UserDailyReview[]
   ReportedCompanyChat ReportedCompanyChat[]
+  CompanySearch       CompanySearch[]
 }
 
 model Password {
@@ -56,7 +57,7 @@ model ReportedCompany {
   comments             ReportedCompanyComment[]
   reviews              Review[]
   companySummary       CompanySummary?
-  companySearch        CompanySearch?
+  companySearch        CompanySearch[]
   companyCategoryScore CompanyCategoryScore[]
   ReportedCompanyChat  ReportedCompanyChat[]
 }
@@ -154,9 +155,11 @@ model CompanySummary {
 
 model CompanySearch {
   id                Int             @id @default(autoincrement())
-  reportedCompanyId Int             @unique
+  reportedCompanyId Int
+  userId            Int
   createdAt         DateTime        @default(now()) @db.Timestamp()
   reportedCompany   ReportedCompany @relation(fields: [reportedCompanyId], references: [id], onDelete: Cascade)
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model CompanyCategoryScore {
