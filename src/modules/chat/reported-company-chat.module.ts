@@ -4,9 +4,11 @@ import { ReportedCompanyChatCreateRepository } from './repositories/reported-com
 import { ReportedCompanyChatCreateService } from './services/reported-company-chat-create.service';
 import { ReportedCompanyChatFindAllRepository } from './repositories/reported-company-chat-find-all.repository';
 import { ReportedCompanyChatFindAllService } from './services/reported-company-find-all.service';
+import { UserModule } from '@modules/users/user.module';
 
 @Module({
   controllers: [ReportedCompanyChatController],
+  imports: [UserModule],
   providers: [
     ReportedCompanyChatCreateRepository,
     ReportedCompanyChatCreateService,

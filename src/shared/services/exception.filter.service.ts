@@ -56,7 +56,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       : { statusCode: status, message };
 
     this.logger.error({
-      message: `[ID- ${uuid}] exception.filter.service: (${status}) ${req.method} ${req.url} - ${message}`,
+      message: `❌❌❌ [ID- ${uuid}] exception.filter.service: (${status}) ${req.method} ${req.url} - ${message}`,
       stack: !ignoredRoutes.includes(req?.url) && (exception as Error)?.stack,
     });
 

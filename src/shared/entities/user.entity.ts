@@ -34,11 +34,11 @@ export class User {
     };
   }
 
-  static toJsonResponse(user: UserPrimitive): Partial<UserPrimitive> {
+  static toJsonResponse(
+    user: UserPrimitive,
+  ): Pick<UserPrimitive, 'id' | 'nickname'> {
     return {
       id: user.id,
-      name: user.name,
-      email: user.email,
       nickname: user.nickname,
     };
   }
