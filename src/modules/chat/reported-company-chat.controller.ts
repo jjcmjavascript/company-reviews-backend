@@ -35,6 +35,7 @@ export class ReportedCompanyChatController {
   }
 
   @Get('company/:reportedCompanyId')
+  @HttpCode(HttpStatus.OK)
   findAllForCompany(
     @Param('reportedCompanyId', ParseIntPipe) reportedCompanyId: number,
   ) {

@@ -10,16 +10,22 @@ export class AuthJwtRegisterMobileRepository {
     private jwtSingInRepostory: AuthJwtSingInRepostory,
   ) {}
 
-  async execute(name: string, email: string, password) {
+  async execute(name: string, email: string, password: string) {
+    const user = {
+      name: name.trim().toLowerCase(),
+      email: email.trim().toLowerCase(),
+      password: password.trim(),
+    };
+
     await this.userCreateRepository.executeTransaction(
       {
-        name: name.trim(),
-        email: email.trim(),
-        password: password.trim(),
+        name: user.name,
+        email: user.email,
+        password: user.password,
       },
       Roles.User,
     );
 
-    return this.jwtSingInRepostory.signInMobile(email, password);
+    return this.jwtSingInRepostory.signInMobile(user.email, user.password);
   }
 }

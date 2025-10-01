@@ -17,6 +17,13 @@ export class ReportedCompanyChatFindAllRepository {
 
     return this.prisma.reportedCompanyChat.findMany({
       where,
+      include: {
+        user: {
+          select: {
+            nickName: true,
+          },
+        },
+      },
     });
   }
 }

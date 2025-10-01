@@ -5,7 +5,7 @@ export interface UserPrimitive {
   tax?: string;
   email: string;
   deletedAt?: Date;
-  nickname?: string;
+  nickName?: string;
 }
 
 export class User {
@@ -21,6 +21,7 @@ export class User {
       name: user.email,
       email: user.email,
       tax: user.tax,
+      nickName: user.nickName,
       deletedAt: user.deletedAt,
     });
   }
@@ -31,15 +32,16 @@ export class User {
       name: this.attributes.name,
       email: this.attributes.email,
       tax: this.attributes.tax,
+      nickName: this.attributes.nickName,
     };
   }
 
   static toJsonResponse(
     user: UserPrimitive,
-  ): Pick<UserPrimitive, 'id' | 'nickname'> {
+  ): Pick<UserPrimitive, 'id' | 'nickName'> {
     return {
       id: user.id,
-      nickname: user.nickname,
+      nickName: user.nickName,
     };
   }
 
@@ -54,7 +56,7 @@ export class User {
       id: user.id,
       name: user.name,
       email: user.email,
-      nickname: user.nickname,
+      nickName: user.nickName,
     }));
   }
 
@@ -65,6 +67,7 @@ export class User {
       email: this.attributes.email,
       tax: this.attributes.tax,
       deletedAt: this.attributes.deletedAt,
+      nickName: this.attributes.nickName,
     };
   }
 }

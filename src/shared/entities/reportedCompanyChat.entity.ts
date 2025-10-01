@@ -27,7 +27,7 @@ export class ReportedCompanyChatEntity {
       message: item.message,
       createdAt: item.createdAt,
       userId: item.userId,
-      author: item.user?.nickname, // no esta en la base de datos, es solo para respuestas
+      author: item.user?.nickName, // no esta en la base de datos, es solo para respuestas
     }));
   }
 
@@ -40,7 +40,7 @@ export class ReportedCompanyChatEntity {
       message: data.message,
       createdAt: data.createdAt,
       userId: data.userId,
-      author: data.user?.nickname, // no esta en la base de datos, es solo para respuestas
+      author: data.user?.nickName, // no esta en la base de datos, es solo para respuestas
     };
   }
 }

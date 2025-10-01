@@ -23,7 +23,9 @@ export class AuthJwtSingInRepostory {
   ) {}
 
   private async validateAndGetUser(email: string, password: string) {
-    const user = await this.userFindOneInternalService.execute({ email });
+    const user = await this.userFindOneInternalService.execute({
+      email: email.trim().toLowerCase(),
+    });
 
     const userPassword = user
       ? (

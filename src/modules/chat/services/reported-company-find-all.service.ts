@@ -6,6 +6,12 @@ export class ReportedCompanyChatFindAllService {
   constructor(private readonly findAll: ReportedCompanyChatFindAllRepository) {}
 
   async execute(reportedCompanyId?: number, userId?: number) {
-    return this.findAll.execute(reportedCompanyId, userId);
+    const result = await this.findAll.execute(reportedCompanyId, userId);
+
+    return result.map((chat) => ({
+      ...chat,
+      author: chat.user?.nickName || 'Unknown',
+      user: undefined,
+    }));
   }
 }

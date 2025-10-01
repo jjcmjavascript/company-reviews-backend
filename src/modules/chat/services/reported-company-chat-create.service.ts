@@ -53,7 +53,7 @@ export class ReportedCompanyChatCreateService {
 
     return {
       ...ReportedCompanyChatEntity.toJsonResponse(result),
-      author: User.toJsonResponse(user.values).nickname || 'Unknown',
+      author: User.toJsonResponse(user.values).nickName || 'Unknown',
     };
   }
 }
