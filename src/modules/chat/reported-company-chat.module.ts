@@ -5,6 +5,7 @@ import { ReportedCompanyChatCreateService } from './services/reported-company-ch
 import { ReportedCompanyChatFindAllRepository } from './repositories/reported-company-chat-find-all.repository';
 import { ReportedCompanyChatFindAllService } from './services/reported-company-find-all.service';
 import { UserModule } from '@modules/users/user.module';
+import { ReportedCompanyChatCountRepository } from './repositories/reported-company-chat-count.repository';
 
 @Module({
   controllers: [ReportedCompanyChatController],
@@ -14,6 +15,7 @@ import { UserModule } from '@modules/users/user.module';
     ReportedCompanyChatCreateService,
     ReportedCompanyChatFindAllRepository,
     ReportedCompanyChatFindAllService,
+    ReportedCompanyChatCountRepository,
   ],
 })
 export class ReportedCompanyChatModule {}
