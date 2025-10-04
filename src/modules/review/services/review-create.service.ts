@@ -1,8 +1,11 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtUser } from '@shared/decorators/user.decorator';
 import { ReviewCreateDto } from '../dto/review-create.dto';
 import { ReviewCreateRepository } from '../repositories/review-create.repository';
 import { Review, ReviewPrimitive } from '@shared/entities/review.entity';
@@ -11,17 +14,20 @@ import { ReviewerTypeFindByIdService } from '@modules/reviewer-type/services/rev
 import { ReviewerTypeCategoryFindAllService } from '@modules/reviewer-type-category/services/reviewer-type-category-find-all.service';
 import { ReviewFindAllRepository } from '../repositories/review-find-all.repository';
 import { ReportedCompanyFindService } from '@modules/reported-company/service/reported-company-find.service';
-import { JwtUser } from '@shared/decorators/user.decorator';
 import { CompanyCategoryScoreCreateService } from '@modules/company-category-score/services/company-category-score-create.service';
 import { ReviewVerificationStatus } from '@shared/enums/commons.enum';
 import { ReviewDetailsCreateService } from '@modules/review-details/services/review-details-create.service';
 import { DefaultLogger } from '@shared/services/logger.service';
+import { UserLimits } from '@config/config.interface';
+import { ReviewTodayCountByUserRepository } from '../repositories/review-today-count-by-user.repository';
 
 @Injectable()
 export class ReviewCreateService {
   private readonly logger = new DefaultLogger(ReviewCreateService.name);
 
   constructor(
+    private readonly configService: ConfigService,
+
     private readonly reviewCreateRepository: ReviewCreateRepository,
     private readonly companyCategoryScoreCreateService: CompanyCategoryScoreCreateService,
     private readonly reviewDetailsCreateRepository: ReviewDetailsCreateService,
@@ -30,6 +36,7 @@ export class ReviewCreateService {
     private readonly reviewerTypeFindByIdService: ReviewerTypeFindByIdService,
     private readonly reviewerTypeCategoryFindAllService: ReviewerTypeCategoryFindAllService,
     private readonly reportedCompanyFindService: ReportedCompanyFindService,
+    private readonly reviewTodayCountRepository: ReviewTodayCountByUserRepository,
   ) {}
 
   async execute(
@@ -39,6 +46,8 @@ export class ReviewCreateService {
     this.logger.init({
       message: `Creating review for company ${params.reportedCompanyId}`,
     });
+
+    await this.checkUserReviewLimit(currentUser.userId);
 
     await this.validateCompany(params.reportedCompanyId);
 
@@ -138,6 +147,20 @@ export class ReviewCreateService {
 
     if (previousReview && previousReview.length > 0) {
       throw new ConflictException(`Review already exists`);
+    }
+  }
+
+  private async checkUserReviewLimit(userId: number) {
+    const userLimits: UserLimits =
+      this.configService.get<UserLimits>('userLimits');
+
+    const reviewsCreatedToday =
+      await this.reviewTodayCountRepository.execute(userId);
+
+    if (reviewsCreatedToday >= userLimits.reviewLimit) {
+      throw new ForbiddenException(
+        'User has reached the maximum number of reviews allowed for today.',
+      );
     }
   }
 }

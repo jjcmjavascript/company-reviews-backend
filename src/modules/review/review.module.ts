@@ -13,6 +13,7 @@ import { ReviewerTypeCategoryModule } from '@modules/reviewer-type-category/revi
 import { CompanyCategoryScoreModule } from '@modules/company-category-score/company-category-score.module';
 import { ReviewDeleteService } from './services/review-delete.service';
 import { ReviewDetailsModule } from '@modules/review-details/review-details.module';
+import { ReviewTodayCountByUserRepository } from './repositories/review-today-count-by-user.repository';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ReviewDetailsModule } from '@modules/review-details/review-details.modu
     ReviewFindAllService,
     ReviewCreateService,
     ReviewDeleteService,
+    ReviewTodayCountByUserRepository,
   ],
   controllers: [ReviewController],
   exports: [ReviewFindAllRepository, ReviewFindAllService, ReviewDeleteService],
