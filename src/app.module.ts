@@ -25,6 +25,7 @@ import { JwtConfig } from '@config/config.interface';
 import { PrismaModule } from '@modules/prisma/prisma.module';
 import { ReportedCompanyChatModule } from '@modules/chat/reported-company-chat.module';
 import { CompanySearchModule } from '@modules/companySearch/company-search.module';
+import { ProfanityModule } from '@modules/profanity/profanity.module';
 
 const providers = [];
 
@@ -74,11 +75,12 @@ providers.push({
         return {
           secret: jwtConfig.jwtSecret,
           signOptions: {
-            expiresIn: jwtConfig.jwtExpiresIn,
+            expiresIn: jwtConfig.jwtExpiresIn as any,
           },
         };
       },
     }),
+    ProfanityModule,
     PrismaModule,
     SentryModule.forRoot(),
     UserModule,
