@@ -1,12 +1,13 @@
 import leoProfanity from 'leo-profanity';
 import fs from 'fs';
 import path from 'path';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ProfanityLanguage } from './profanity.types';
+import { DefaultLogger } from '../logger.service';
 
 @Injectable()
 export class ProfanityFilterService {
-  private readonly logger = new Logger(ProfanityFilterService.name);
+  private readonly logger = new DefaultLogger(ProfanityFilterService.name);
   currentLanguage: ProfanityLanguage = 'es';
   private initialized = false;
 
@@ -33,9 +34,10 @@ export class ProfanityFilterService {
       const filePath = candidates.find((p) => fs.existsSync(p));
 
       if (!filePath) {
-        this.logger.warn(
-          'Profane dictionary file not found; using builtin dictionaries only',
-        );
+        this.logger.end({
+          message:
+            'Profane dictionary file not found; using builtin dictionaries only',
+        });
       } else {
         const spanishList = fs
           .readFileSync(filePath, 'utf8')
@@ -44,12 +46,14 @@ export class ProfanityFilterService {
           .filter(Boolean);
 
         leoProfanity.addDictionary('es', spanishList);
-        this.logger.log(`Loaded profanity dictionary from ${filePath}`);
+        this.logger.process({
+          message: `Loaded profanity dictionary from ${filePath}`,
+        });
       }
 
       this.initialized = true;
     } catch (err) {
-      this.logger.error('Error initializing profanity dictionary', err as any);
+      this.logger.fromError(err);
     }
   }
 
@@ -102,9 +106,6 @@ export class ProfanityFilterService {
     const cleanedWords = words.map((word) =>
       leoProfanity.check(word) ? '*'.repeat(word.length) : word,
     );
-
-    console.log('Original:', text, words);
-    console.log('Limpio  :', cleanedWords.join(''));
 
     return cleanedWords.join('');
   }
