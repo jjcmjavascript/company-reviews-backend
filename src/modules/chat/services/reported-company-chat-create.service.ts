@@ -68,7 +68,6 @@ export class ReportedCompanyChatCreateService {
     const userLimits = this.configService.get<UserLimits>('userLimits');
     const chatsCreatedToday = await this.countService.execute(userId);
 
-    console.log(userLimits, chatsCreatedToday);
     if (userLimits && chatsCreatedToday >= userLimits.messageLimit) {
       throw new ForbiddenException(
         'User has reached the maximum number of chat messages allowed for today.',

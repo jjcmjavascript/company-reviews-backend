@@ -20,13 +20,33 @@ export class LoggingInterceptor implements NestInterceptor {
 
     request.headers['x-request-id'] = uuid;
 
+    let clonedBody = request.body;
+
+    if (request.body && typeof request.body === 'object') {
+      clonedBody = { ...request.body };
+
+      const sensitiveFields = [
+        'creditCardNumber',
+        'cvv',
+        'password',
+        'newPassword',
+        'oldPassword',
+      ];
+
+      sensitiveFields.forEach((field) => {
+        if (field in (clonedBody as Record<string, unknown>)) {
+          clonedBody[field] = '****';
+        }
+      });
+    }
+
     this.logger.init({
       message: ` 🚀 [ID- ${uuid}] ${request.method} ${request.url}`,
       objects: {
         headers: request.headers,
         params: request.params,
         query: request.query,
-        body: request.body,
+        body: clonedBody,
       },
     });
 
