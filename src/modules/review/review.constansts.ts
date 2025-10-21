@@ -1,0 +1,7 @@
+const MAX_DESCRIPTION_LENGTH = 400;
+const MIN_DESCRIPTION_LENGTH = 10;
+
+export const ReviewConstants = {
+  MAX_DESCRIPTION_LENGTH,
+  MIN_DESCRIPTION_LENGTH,
+};

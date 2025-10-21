@@ -14,6 +14,7 @@ import { CompanyCategoryScoreModule } from '@modules/company-category-score/comp
 import { ReviewDeleteService } from './services/review-delete.service';
 import { ReviewDetailsModule } from '@modules/review-details/review-details.module';
 import { ReviewTodayCountByUserRepository } from './repositories/review-today-count-by-user.repository';
+import { ProfanityModule } from '@modules/profanity/profanity.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ReviewTodayCountByUserRepository } from './repositories/review-today-co
     ReportedCompanyModule,
     CompanyCategoryScoreModule,
     ReviewDetailsModule,
+    ProfanityModule,
   ],
   providers: [
     ReviewDetailCreateRepository,

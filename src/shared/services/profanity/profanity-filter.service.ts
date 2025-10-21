@@ -2,13 +2,12 @@ import leoProfanity from 'leo-profanity';
 import fs from 'fs';
 import path from 'path';
 import { Injectable, Logger } from '@nestjs/common';
-
-export type LeoLanguage = 'es' | 'en';
+import { ProfanityLanguage } from './profanity.types';
 
 @Injectable()
 export class ProfanityFilterService {
   private readonly logger = new Logger(ProfanityFilterService.name);
-  currentLanguage: LeoLanguage = 'es';
+  currentLanguage: ProfanityLanguage = 'es';
   private initialized = false;
 
   constructor() {
@@ -20,21 +19,22 @@ export class ProfanityFilterService {
 
     try {
       const candidates = [
-        path.resolve(__dirname, 'spanish-words.txt'), // when running from ts-node / dev
+        path.resolve(__dirname, 'dictionaries/es.txt'),
         path.resolve(
           process.cwd(),
-          'src/shared/services/profanity/spanish-words.txt',
+          'src/shared/services/profanity/dictionaries/es.txt',
         ),
         path.resolve(
           process.cwd(),
-          'dist/shared/services/profanity/spanish-words.txt',
-        ), // after build
+          'dist/shared/services/profanity/dictionaries/es.txt',
+        ),
       ];
 
       const filePath = candidates.find((p) => fs.existsSync(p));
+
       if (!filePath) {
         this.logger.warn(
-          'profane dictionary file not found; using builtin dictionaries only',
+          'Profane dictionary file not found; using builtin dictionaries only',
         );
       } else {
         const spanishList = fs
@@ -53,12 +53,7 @@ export class ProfanityFilterService {
     }
   }
 
-  public clean(text: string): string {
-    this.initDictionary();
-    return leoProfanity.clean(text, { languages: ['es'] });
-  }
-
-  public loadDictionary(language: LeoLanguage): void {
+  public loadDictionary(language: ProfanityLanguage): void {
     if (language !== this.currentLanguage) {
       this.currentLanguage = language;
       leoProfanity.loadDictionary(language);
@@ -67,14 +62,63 @@ export class ProfanityFilterService {
 
   public containsProfanity(
     text: string,
-    language: LeoLanguage = 'es',
-  ): boolean {
+    language: ProfanityLanguage = 'es',
+  ): {
+    hasProfanity: boolean;
+    cleaneable: boolean;
+  } {
     this.initDictionary();
     this.loadDictionary(language);
-    return leoProfanity.check(text);
+    const normalized = this.normalize(text);
+
+    // Chequeo directo
+    if (leoProfanity.check(normalized))
+      return { hasProfanity: true, cleaneable: true };
+
+    // Chequeo por fragmentos dentro de palabras largas
+    //TODO: habilitar si se desea esta funcionalidad , tengo q ver como lo mejoro
+    // const tokens = normalized.split(/\s+/);
+
+    // for (const token of tokens) {
+    //   for (const bad of leoProfanity.list()) {
+    //     if (token.includes(bad)) {
+    //       return { hasProfanity: true, cleaneable: false };
+    //     }
+    //   }
+    // }
+
+    return { hasProfanity: false, cleaneable: false };
   }
 
-  public sanitizeText(text: string): string {
-    return this.clean(text);
+  public clean(text: string, language: ProfanityLanguage = 'es'): string {
+    this.initDictionary();
+    this.loadDictionary(language);
+
+    const normalized = this.normalize(text);
+    if (!leoProfanity.check(normalized)) return text; // no hay groserías
+
+    // Mapea las groserías del normalizado al texto original
+    const words = normalized.split(/\b/);
+    const cleanedWords = words.map((word) =>
+      leoProfanity.check(word) ? '*'.repeat(word.length) : word,
+    );
+
+    console.log('Original:', text, words);
+    console.log('Limpio  :', cleanedWords.join(''));
+
+    return cleanedWords.join('');
+  }
+
+  /** 🧠 Normaliza SOLO para detección */
+  private normalize(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[@4áàä]/g, 'a')
+      .replace(/[3éèë]/g, 'e')
+      .replace(/[1!|íìï]/g, 'i')
+      .replace(/[0óòö]/g, 'o')
+      .replace(/[5\$]/g, 's')
+      .replace(/[7]/g, 't')
+      .replace(/[^a-z0-9\s]/g, '');
   }
 }

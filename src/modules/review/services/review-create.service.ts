@@ -20,6 +20,8 @@ import { ReviewDetailsCreateService } from '@modules/review-details/services/rev
 import { DefaultLogger } from '@shared/services/logger.service';
 import { UserLimits } from '@config/config.interface';
 import { ReviewTodayCountByUserRepository } from '../repositories/review-today-count-by-user.repository';
+import { ProfanityService } from '@modules/profanity/profanity.service';
+import { ReviewConstants } from '../review.constansts';
 
 @Injectable()
 export class ReviewCreateService {
@@ -37,6 +39,7 @@ export class ReviewCreateService {
     private readonly reviewerTypeCategoryFindAllService: ReviewerTypeCategoryFindAllService,
     private readonly reportedCompanyFindService: ReportedCompanyFindService,
     private readonly reviewTodayCountRepository: ReviewTodayCountByUserRepository,
+    private readonly profanityService: ProfanityService,
   ) {}
 
   async execute(
@@ -60,8 +63,14 @@ export class ReviewCreateService {
       params.reportedCompanyId,
     );
 
+    const cleanedText = this.checkAndGetProfanity(params.description)?.slice(
+      0,
+      ReviewConstants.MAX_DESCRIPTION_LENGTH,
+    );
+
     const result = await this.reviewCreateRepository.execute({
       ...params,
+      description: cleanedText,
       userId: currentUser.userId,
     });
 
@@ -162,5 +171,19 @@ export class ReviewCreateService {
         'User has reached the maximum number of reviews allowed for today.',
       );
     }
+  }
+
+  private checkAndGetProfanity(text: string) {
+    const profanityResult = this.profanityService.execute(text);
+
+    if (
+      profanityResult.error ||
+      (profanityResult.containsProfanity.hasProfanity &&
+        !profanityResult.containsProfanity.cleaneable)
+    ) {
+      throw new BadRequestException('Inappropriate language detected');
+    }
+
+    return profanityResult.cleanedText;
   }
 }

@@ -1,3 +1,9 @@
+type UnitAnyCase = 'ms' | 's' | 'm' | 'h' | 'd' | 'w';
+type StringValue =
+  | `${number}`
+  | `${number}${UnitAnyCase}`
+  | `${number} ${UnitAnyCase}`;
+
 export interface Config {
   app: AppConfig;
   cors: CorsConfig;
@@ -19,8 +25,8 @@ export interface CorsConfig {
 
 export interface JwtConfig {
   jwtSecret: string;
-  jwtExpiresIn: string;
-  jwtRefreshExpiresIn: string;
+  jwtExpiresIn: StringValue | number;
+  jwtRefreshExpiresIn: StringValue | number;
   accessTtlSec: number;
   refreshTtlSec: number;
 }

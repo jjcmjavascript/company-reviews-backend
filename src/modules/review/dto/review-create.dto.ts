@@ -11,6 +11,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { ReviewDetailCreateDto } from '@modules/review-details/dto/review-detail-create.dto';
+import { ReviewConstants } from '../review.constansts';
 
 export class ReviewCreateDto {
   @IsNotEmpty({ message: 'Company is required' })
@@ -23,8 +24,10 @@ export class ReviewCreateDto {
 
   @IsNotEmpty({ message: 'Description is required' })
   @IsString({ message: 'Description must be a string' })
-  @MinLength(10, { message: 'Description must be at least 10 characters long' })
-  @MaxLength(400, {
+  @MinLength(ReviewConstants.MIN_DESCRIPTION_LENGTH, {
+    message: 'Description must be at least 10 characters long',
+  })
+  @MaxLength(ReviewConstants.MAX_DESCRIPTION_LENGTH, {
     message: 'Description must be at most 400 characters long',
   })
   description: string;

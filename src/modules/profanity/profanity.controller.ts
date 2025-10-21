@@ -1,26 +1,15 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ProfanityFilterService } from '@shared/services/profanity/profanity-filter.service';
+import { ProfanityDto } from './profanity.dto';
+import { ProfanityService } from './profanity.service';
 
 @Controller('profanity')
 export class ProfanityController {
-  constructor(
-    private readonly profanityFilterService: ProfanityFilterService,
-  ) {}
+  constructor(private readonly profanityService: ProfanityService) {}
 
   @Post('test')
-  test(@Body() body: { text: string }): string {
+  test(@Body() body: ProfanityDto) {
     const { text } = body;
-    if (!text || text.toString().trim() === '') {
-      return 'No text provided.';
-    }
-    const trimmedText = text.toString().trim().slice(0, 50);
 
-    const containsProfanity = this.profanityFilterService.containsProfanity(
-      trimmedText,
-      'es',
-    );
-    const cleanedText = this.profanityFilterService.clean(trimmedText);
-
-    return `Contains profanity: ${containsProfanity}. Cleaned text: ${cleanedText}`;
+    return this.profanityService.execute(text);
   }
 }

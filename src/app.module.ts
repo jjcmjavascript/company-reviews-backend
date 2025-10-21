@@ -75,7 +75,7 @@ providers.push({
         return {
           secret: jwtConfig.jwtSecret,
           signOptions: {
-            expiresIn: jwtConfig.jwtExpiresIn as any,
+            expiresIn: jwtConfig.jwtExpiresIn,
           },
         };
       },
